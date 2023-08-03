@@ -3,9 +3,11 @@
 
 
        <!-- Button trigger modal -->
-    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <!-- <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Create New Department
-    </button>
+    </button> -->
+
+<button class="btn btn-success" @click="createDepartment">New Department</button>
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -60,6 +62,11 @@
             return {
                 name: "",
                 director_id:"",
+            }
+        },
+        methods: {
+            createDepartment() {
+                $("#exampleModal").modal("show")
             }
         }
 
