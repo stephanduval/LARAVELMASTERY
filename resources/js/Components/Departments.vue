@@ -14,6 +14,19 @@
                     </button>
                 </div>
                 <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table-hover text-center">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Director</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+
                     <!-- Modal -->
                     <div
                         class="modal fade"
@@ -40,7 +53,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="row align-items-center">
-                                        <div class="col-md-5">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="name">Name</label>
                                                 <input
@@ -48,11 +61,13 @@
                                                     class="form-control"
                                                     name="name"
                                                     id=""
-                                                    v-model="name"
+                                                    v-model="
+                                                        departmentData.name
+                                                    "
                                                 />
                                             </div>
                                         </div>
-                                        <div class="col-md-5">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="director_id"
                                                     >Director</label
@@ -60,7 +75,9 @@
                                                 <select
                                                     name="director_id"
                                                     class="form-control"
-                                                    v-model="director_id"
+                                                    v-model="
+                                                        departmentData.director_id
+                                                    "
                                                 >
                                                     <option value="">
                                                         Select a person
@@ -72,16 +89,6 @@
                                                         HR Director
                                                     </option>
                                                 </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <button
-                                                    type="submit"
-                                                    class="btn btn-success float-right"
-                                                >
-                                                    Save
-                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -96,9 +103,10 @@
                                     </button>
                                     <button
                                         type="button"
+                                        @click="storeDepartment"
                                         class="btn btn-success"
                                     >
-                                        Save changes
+                                        Store
                                     </button>
                                 </div>
                             </div>
@@ -114,19 +122,35 @@
 export default {
     data() {
         return {
-            name: "",
-            director_id: "",
+            departmentsList: {}, // Creates an empty array
+            departmentData: {
+                name: "",
+                director_id: "",
+            },
         };
     },
     methods: {
+        getDepartments() {
+            axios.get(window.url + "api/getDepartments").then((response) => {
+                console.log(response.data);
+                this.departmentsList = response.data;
+            });
+        },
         createDepartment() {
+            this.departmentData.name = this.departmentData.director_id = "";
+            //Make the Form Boxes = ""  (EMPTY_)
             $("#exampleModal").modal("show");
+        },
+        storeDepartment() {
+            axios
+                .post(window.url + "api/storeDepartment", this.departmentData)
+                .then((response) => {
+                    $("#exampleModal").modal("hide");
+                });
         },
     },
     mounted() {
-        for (let i = 0; i < 10; i++) {
-            console.log("The count is", i);
-        }
+        this.getDepartments();
     },
 };
 </script>

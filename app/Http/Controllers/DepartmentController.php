@@ -9,6 +9,31 @@ use Session;
 
 class DepartmentController extends Controller
 {
+
+    //  below code is related to VUEjs crud
+
+    public function storeDepartment(Request $request)
+    {
+
+        Department::create([
+            'user_id' => 1,
+            'name' => $request->name,
+            'director_id' => $request->director_id,
+
+        ]);
+
+        return response()->json("success");
+    }
+
+
+
+    //  below code is related to laravel crud
+    public function getDepartments()
+    {
+        return response()->json(Department::latest()->get());
+    }
+
+
     public function index()
     {
         $departments = Department::all();

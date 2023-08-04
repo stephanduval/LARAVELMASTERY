@@ -10,4 +10,7 @@ const app = createApp({});
 
 app.component("departments", Departments);
 
+window.url = "/";
+// Global URL
+
 app.mount("#app");
