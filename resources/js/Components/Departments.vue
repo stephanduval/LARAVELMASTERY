@@ -15,7 +15,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table-hover text-center">
+                        <table class="table-hover text-center col-md-12">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -24,6 +24,26 @@
                                     <th>Actions</th>
                                 </tr>
                             </thead>
+                            <tbody>
+                                <tr
+                                    v-for="(
+                                        department, index
+                                    ) in departmentsList"
+                                    :key="index"
+                                >
+                                    <td>{{ index + 1 }}</td>
+                                    <td>{{ department.name }}</td>
+                                    <td>{{ department.director_id }}</td>
+                                    <td>
+                                        <button
+                                            class="btn btn-success"
+                                            @click="editDepartment(department)"
+                                        >
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
 
@@ -38,12 +58,16 @@
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1
+                                    <h5
                                         class="modal-title fs-5"
                                         id="exampleModalLabel"
                                     >
-                                        Modal title
-                                    </h1>
+                                        {{
+                                            !editMode
+                                                ? "Create Department"
+                                                : "Update Department"
+                                        }}
+                                    </h5>
                                     <button
                                         type="button"
                                         class="btn-close"
@@ -103,10 +127,14 @@
                                     </button>
                                     <button
                                         type="button"
-                                        @click="storeDepartment"
+                                        @click="
+                                            !editMode
+                                                ? storeDepartment()
+                                                : updateDepartment()
+                                        "
                                         class="btn btn-success"
                                     >
-                                        Store
+                                        {{ !editMode ? "Store" : "Update" }}
                                     </button>
                                 </div>
                             </div>
@@ -122,8 +150,10 @@
 export default {
     data() {
         return {
+            editMode: false,
             departmentsList: {}, // Creates an empty array
             departmentData: {
+                department_id: "",
                 name: "",
                 director_id: "",
             },
@@ -137,6 +167,8 @@ export default {
             });
         },
         createDepartment() {
+            this.editMode = false;
+            console.log("Edit Mode is:", this.editMode);
             this.departmentData.name = this.departmentData.director_id = "";
             //Make the Form Boxes = ""  (EMPTY_)
             $("#exampleModal").modal("show");
@@ -145,6 +177,31 @@ export default {
             axios
                 .post(window.url + "api/storeDepartment", this.departmentData)
                 .then((response) => {
+                    this.getDepartments();
+                    $("#exampleModal").modal("hide");
+                });
+        },
+        editDepartment(department) {
+            console.log(department);
+            this.editMode = true;
+            console.log("Edit Mode is:", this.editMode);
+
+            this.departmentData.id = department.id;
+            this.departmentData.name = department.name;
+            this.departmentData.director_id = department.director_id;
+            ("department.");
+            $("#exampleModal").modal("show");
+        },
+        updateDepartment() {
+            axios
+                .post(
+                    window.url +
+                        "api/updateDepartment/" +
+                        this.departmentData.id,
+                    this.departmentData
+                )
+                .then((response) => {
+                    this.getDepartments();
                     $("#exampleModal").modal("hide");
                 });
         },

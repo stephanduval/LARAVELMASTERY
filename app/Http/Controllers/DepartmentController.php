@@ -25,6 +25,18 @@ class DepartmentController extends Controller
         return response()->json("success");
     }
 
+    public function updateDepartment(Request $request, $id)
+    {
+
+
+        Department::where('id', $id)->update([
+            'name' => $request->name,
+            'director_id' => $request->director_id,
+
+        ]);
+
+        return response()->json("success");
+    }
 
 
     //  below code is related to laravel crud
