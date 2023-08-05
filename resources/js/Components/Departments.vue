@@ -98,18 +98,12 @@
                                                         departmentData.name
                                                     "
                                                 />
-                                                <!-- Commented out after vform implemented-->
-                                                <!-- <p
+                                                <p
                                                     class="text-danger"
                                                     v-if="departmentErrors.name"
                                                 >
                                                     Name is required
-                                                </p> -->
-                                                <div class=""text-center" v-if="
-                                                departmentData.errors.has(
-                                                'name' ) " v-html="
-                                                departmentData.errors.get(
-                                                'name' ) " />
+                                                </p>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -219,13 +213,8 @@ export default {
             //     : (this.departmentErrors.director_id = false);
 
             // if (this.departmentData.name && this.departmentData.director_id) {
-            // axios
-            this.departmentData
-
-                .post(
-                    window.url + "api/storeDepartment"
-                    // , this.departmentData
-                )
+            axios
+                .post(window.url + "api/storeDepartment", this.departmentData)
                 .then((response) => {
                     this.getDepartments();
                     $("#exampleModal").modal("hide");
@@ -255,8 +244,7 @@ export default {
             //     : (this.departmentErrors.director_id = false);
 
             // if (this.departmentData.name && this.departmentData.director_id) {
-            // axios
-            this.departmentData
+            axios
                 .post(
                     window.url +
                         "api/updateDepartment/" +
