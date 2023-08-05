@@ -3,8 +3,9 @@ import "./bootstrap";
 import { createApp } from "vue/dist/vue.esm-bundler";
 // WAS
 //import { createApp } from "Vue";
-
 import Departments from "./Components/Departments.vue";
+import Form from "vform";
+window.Form = Form;
 
 const app = createApp({});
 

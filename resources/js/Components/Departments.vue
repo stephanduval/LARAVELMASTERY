@@ -98,6 +98,12 @@
                                                         departmentData.name
                                                     "
                                                 />
+                                                <p
+                                                    class="text-danger"
+                                                    v-if="departmentErrors.name"
+                                                >
+                                                    Name is required
+                                                </p>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -122,6 +128,14 @@
                                                         HR Director
                                                     </option>
                                                 </select>
+                                                <p
+                                                    class="text-danger"
+                                                    v-if="
+                                                        departmentErrors.director_id
+                                                    "
+                                                >
+                                                    Director is required
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -167,6 +181,10 @@ export default {
                 name: "",
                 director_id: "",
             },
+            departmentErrors: {
+                department_id: false,
+                name: false,
+            },
         };
     },
     methods: {
@@ -184,12 +202,26 @@ export default {
             $("#exampleModal").modal("show");
         },
         storeDepartment() {
-            axios
-                .post(window.url + "api/storeDepartment", this.departmentData)
-                .then((response) => {
-                    this.getDepartments();
-                    $("#exampleModal").modal("hide");
-                });
+            //logic for the Validation Comment <p></p> fields
+            // This turns on the validation error if there is one.
+            this.departmentData.name == ""
+                ? (this.departmentErrors.name = true)
+                : (this.departmentErrors.name = false);
+            this.departmentData.director_id == ""
+                ? (this.departmentErrors.director_id = true)
+                : (this.departmentErrors.director_id = false);
+
+            if (this.departmentData.name && this.departmentData.director_id) {
+                axios
+                    .post(
+                        window.url + "api/storeDepartment",
+                        this.departmentData
+                    )
+                    .then((response) => {
+                        this.getDepartments();
+                        $("#exampleModal").modal("hide");
+                    });
+            }
         },
         editDepartment(department) {
             console.log(department);
@@ -203,17 +235,28 @@ export default {
             $("#exampleModal").modal("show");
         },
         updateDepartment() {
-            axios
-                .post(
-                    window.url +
-                        "api/updateDepartment/" +
-                        this.departmentData.id,
-                    this.departmentData
-                )
-                .then((response) => {
-                    this.getDepartments();
-                    $("#exampleModal").modal("hide");
-                });
+            //logic for the Validation Comment <p></p> fields
+            // This turns on the validation error if there is one.
+            this.departmentData.name == ""
+                ? (this.departmentErrors.name = true)
+                : (this.departmentErrors.name = false);
+            this.departmentData.director_id == ""
+                ? (this.departmentErrors.director_id = true)
+                : (this.departmentErrors.director_id = false);
+
+            if (this.departmentData.name && this.departmentData.director_id) {
+                axios
+                    .post(
+                        window.url +
+                            "api/updateDepartment/" +
+                            this.departmentData.id,
+                        this.departmentData
+                    )
+                    .then((response) => {
+                        this.getDepartments();
+                        $("#exampleModal").modal("hide");
+                    });
+            }
         },
         deleteDepartment(department) {
             if (confirm("Are you sure you wanna delete department!")) {
