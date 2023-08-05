@@ -36,10 +36,19 @@
                                     <td>{{ department.director_id }}</td>
                                     <td>
                                         <button
-                                            class="btn btn-success"
+                                            class="btn btn-success mx-1"
                                             @click="editDepartment(department)"
                                         >
                                             <i class="fa fa-edit"></i>
+                                        </button>
+
+                                        <button
+                                            class="btn btn-danger mx-1"
+                                            @click="
+                                                deleteDepartment(department)
+                                            "
+                                        >
+                                            <i class="fa fa-trash"></i>
                                         </button>
                                     </td>
                                 </tr>
@@ -153,6 +162,7 @@ export default {
             editMode: false,
             departmentsList: {}, // Creates an empty array
             departmentData: {
+                id: "",
                 department_id: "",
                 name: "",
                 director_id: "",
@@ -204,6 +214,15 @@ export default {
                     this.getDepartments();
                     $("#exampleModal").modal("hide");
                 });
+        },
+        deleteDepartment(department) {
+            if (confirm("Are you sure you wanna delete department!")) {
+                axios
+                    .post(window.url + "api/deleteDepartment/" + department.id)
+                    .then(() => {
+                        this.getDepartments();
+                    });
+            }
         },
     },
     mounted() {

@@ -26,7 +26,7 @@
                 <ul class="list-unstyled components mb-5">
                     <li class="active">
                         <a href="#homeSubmenu" data-bs-toggle="collapse" role="button" aria-expanded="false"
-                            aria-controls="homeSubmenu">Mangement
+                            aria-controls="homeSubmenu">Management
                             <i class="fa fa-angle-down float-end mt-2"></i></a>
                         <ul class="collapse list-unstyled" id="homeSubmenu">
                             <li>
