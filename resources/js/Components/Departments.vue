@@ -98,12 +98,18 @@
                                                         departmentData.name
                                                     "
                                                 />
-                                                <p
+                                                <!-- Commented out after vform implemented-->
+                                                <!-- <p
                                                     class="text-danger"
                                                     v-if="departmentErrors.name"
                                                 >
                                                     Name is required
-                                                </p>
+                                                </p> -->
+                                                <div class=""text-center" v-if="
+                                                departmentData.errors.has(
+                                                'name' ) " v-html="
+                                                departmentData.errors.get(
+                                                'name' ) " />
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -175,12 +181,12 @@ export default {
         return {
             editMode: false,
             departmentsList: {}, // Creates an empty array
-            departmentData: {
+            departmentData: new Form({
                 id: "",
                 department_id: "",
                 name: "",
                 director_id: "",
-            },
+            }),
             departmentErrors: {
                 department_id: false,
                 name: false,
@@ -204,24 +210,27 @@ export default {
         storeDepartment() {
             //logic for the Validation Comment <p></p> fields
             // This turns on the validation error if there is one.
-            this.departmentData.name == ""
-                ? (this.departmentErrors.name = true)
-                : (this.departmentErrors.name = false);
-            this.departmentData.director_id == ""
-                ? (this.departmentErrors.director_id = true)
-                : (this.departmentErrors.director_id = false);
+            // Commented out after implmenting vform
+            // this.departmentData.name == ""
+            //     ? (this.departmentErrors.name = true)
+            //     : (this.departmentErrors.name = false);
+            // this.departmentData.director_id == ""
+            //     ? (this.departmentErrors.director_id = true)
+            //     : (this.departmentErrors.director_id = false);
 
-            if (this.departmentData.name && this.departmentData.director_id) {
-                axios
-                    .post(
-                        window.url + "api/storeDepartment",
-                        this.departmentData
-                    )
-                    .then((response) => {
-                        this.getDepartments();
-                        $("#exampleModal").modal("hide");
-                    });
-            }
+            // if (this.departmentData.name && this.departmentData.director_id) {
+            // axios
+            this.departmentData
+
+                .post(
+                    window.url + "api/storeDepartment"
+                    // , this.departmentData
+                )
+                .then((response) => {
+                    this.getDepartments();
+                    $("#exampleModal").modal("hide");
+                });
+            // }
         },
         editDepartment(department) {
             console.log(department);
@@ -237,26 +246,28 @@ export default {
         updateDepartment() {
             //logic for the Validation Comment <p></p> fields
             // This turns on the validation error if there is one.
-            this.departmentData.name == ""
-                ? (this.departmentErrors.name = true)
-                : (this.departmentErrors.name = false);
-            this.departmentData.director_id == ""
-                ? (this.departmentErrors.director_id = true)
-                : (this.departmentErrors.director_id = false);
+            // Commented out after implmenting vform
+            // this.departmentData.name == ""
+            //     ? (this.departmentErrors.name = true)
+            //     : (this.departmentErrors.name = false);
+            // this.departmentData.director_id == ""
+            //     ? (this.departmentErrors.director_id = true)
+            //     : (this.departmentErrors.director_id = false);
 
-            if (this.departmentData.name && this.departmentData.director_id) {
-                axios
-                    .post(
-                        window.url +
-                            "api/updateDepartment/" +
-                            this.departmentData.id,
-                        this.departmentData
-                    )
-                    .then((response) => {
-                        this.getDepartments();
-                        $("#exampleModal").modal("hide");
-                    });
-            }
+            // if (this.departmentData.name && this.departmentData.director_id) {
+            // axios
+            this.departmentData
+                .post(
+                    window.url +
+                        "api/updateDepartment/" +
+                        this.departmentData.id,
+                    this.departmentData
+                )
+                .then((response) => {
+                    this.getDepartments();
+                    $("#exampleModal").modal("hide");
+                });
+            // }
         },
         deleteDepartment(department) {
             if (confirm("Are you sure you wanna delete department!")) {
