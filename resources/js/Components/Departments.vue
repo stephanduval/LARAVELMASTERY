@@ -98,12 +98,25 @@
                                                         departmentData.name
                                                     "
                                                 />
-                                                <p
+                                                <!-- <p
                                                     class="text-danger"
                                                     v-if="departmentErrors.name"
                                                 >
                                                     Name is required
-                                                </p>
+                                                </p> -->
+                                                <div
+                                                    class="text-danger"
+                                                    v-if="
+                                                        departmentData.errors.has(
+                                                            'name'
+                                                        )
+                                                    "
+                                                    v-html="
+                                                        departmentData.errors.get(
+                                                            'name'
+                                                        )
+                                                    "
+                                                />
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -128,14 +141,27 @@
                                                         HR Director
                                                     </option>
                                                 </select>
-                                                <p
+                                                <!-- <p
                                                     class="text-danger"
                                                     v-if="
                                                         departmentErrors.director_id
                                                     "
                                                 >
                                                     Director is required
-                                                </p>
+                                                </p> -->
+                                                <div
+                                                    class="text-danger"
+                                                    v-if="
+                                                        departmentData.errors.has(
+                                                            'director_id'
+                                                        )
+                                                    "
+                                                    v-html="
+                                                        departmentData.errors.get(
+                                                            'director_id'
+                                                        )
+                                                    "
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -213,8 +239,12 @@ export default {
             //     : (this.departmentErrors.director_id = false);
 
             // if (this.departmentData.name && this.departmentData.director_id) {
-            axios
-                .post(window.url + "api/storeDepartment", this.departmentData)
+            // axios
+            this.departmentData
+                .post(
+                    window.url + "api/storeDepartment"
+                    // , this.departmentData
+                )
                 .then((response) => {
                     this.getDepartments();
                     $("#exampleModal").modal("hide");
@@ -244,12 +274,14 @@ export default {
             //     : (this.departmentErrors.director_id = false);
 
             // if (this.departmentData.name && this.departmentData.director_id) {
-            axios
+            // axios
+            this.departmentData
                 .post(
                     window.url +
                         "api/updateDepartment/" +
-                        this.departmentData.id,
-                    this.departmentData
+                        this.departmentData.id
+                    // ,
+                    // this.departmentData
                 )
                 .then((response) => {
                     this.getDepartments();
