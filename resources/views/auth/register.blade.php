@@ -11,10 +11,18 @@
                     <h5 class="text-center text-light">Register</h5>
                 </div>
                 <div class="card-body">
-                    <form action="">
+                    <form action="{{ route('register') }}" method="POST">
+                        @csrf
                         <div class="form-group my-1">
                             <label for="email">Email</label>
-                            <input type="email" name="email" class="form-control">
+                            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
+                                value="{{ old('email') }}" placeholder="Email Address">
+
+                            @error('email')
+                                <span class="invalid-feedback">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="form-group my-1">
                             <label for="name">Name</label>
@@ -36,7 +44,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group my-1">
-                                    <a href="{{ route('register') }}" class="btn btn-dark float-end">Login</a>
+                                    <a href="{{ route('login') }}" class="btn btn-dark float-end">Login</a>
                                 </div>
                             </div>
                         </div>
