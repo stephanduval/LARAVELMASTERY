@@ -26,15 +26,30 @@
                         </div>
                         <div class="form-group my-1">
                             <label for="name">Name</label>
-                            <input type="text" name="name" class="form-control">
+                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
+                                value="{{ old('name') }}" placeholder="User Name">
+
+                            @error('name')
+                                <span class="invalid-feedback">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="form-group my-1">
                             <label for="password">Password</label>
-                            <input type="password" name="password" class="form-control">
+                            <input type="password" name="password"
+                                class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}"
+                                placeholder="Password" autocomplete="new-password">
+                            @error('password')
+                                <span class="invalid-feedback">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="form-group my-1">
                             <label for="password_confirmation">Confirm Password</label>
-                            <input type="password" name="password_confirmation" class="form-control">
+                            <input type="password" name="password_confirmation"
+                                class="form-control @error('password_confirmation') is-invalid @enderror">
                         </div>
                         <div class="row">
                             <div class="col-md-6">
