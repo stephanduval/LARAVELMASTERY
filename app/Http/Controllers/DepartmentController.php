@@ -10,6 +10,9 @@ use Session;
 class DepartmentController extends Controller
 {
 
+
+
+
     //  below code is related to VUEjs crud
 
     public function storeDepartment(Request $request)

@@ -40,6 +40,7 @@
                             <input type="password" name="password"
                                 class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}"
                                 placeholder="Password" autocomplete="new-password" required>
+
                             @error('password')
                                 <span class="invalid-feedback">
                                     <strong>{{ $message }}</strong>
