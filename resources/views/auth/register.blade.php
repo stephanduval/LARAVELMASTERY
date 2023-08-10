@@ -16,7 +16,7 @@
                         <div class="form-group my-1">
                             <label for="email">Email</label>
                             <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
-                                value="{{ old('email') }}" placeholder="Email Address">
+                                value="{{ old('email') }}" placeholder="Email Address" required>
 
                             @error('email')
                                 <span class="invalid-feedback">
@@ -27,7 +27,7 @@
                         <div class="form-group my-1">
                             <label for="name">Name</label>
                             <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
-                                value="{{ old('name') }}" placeholder="User Name">
+                                value="{{ old('name') }}" placeholder="User Name" required>
 
                             @error('name')
                                 <span class="invalid-feedback">
@@ -39,7 +39,7 @@
                             <label for="password">Password</label>
                             <input type="password" name="password"
                                 class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}"
-                                placeholder="Password" autocomplete="new-password">
+                                placeholder="Password" autocomplete="new-password" required>
                             @error('password')
                                 <span class="invalid-feedback">
                                     <strong>{{ $message }}</strong>
@@ -49,7 +49,13 @@
                         <div class="form-group my-1">
                             <label for="password_confirmation">Confirm Password</label>
                             <input type="password" name="password_confirmation"
-                                class="form-control @error('password_confirmation') is-invalid @enderror">
+                                class="form-control autocomplete="new-password" required>
+
+                            @error('password')
+                                <span class="invalid-feedback">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="row">
                             <div class="col-md-6">
