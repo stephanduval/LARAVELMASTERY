@@ -9,54 +9,47 @@ use Session;
 
 class DepartmentController extends Controller
 {
+    // function __construct()
+    // {
+    //     $this->middleware('auth:api');
+    // }
 
+    // below code is related to vue js crud
 
-
-    function __construct()
+    public function getDepartments()
     {
-        $this->middleware('auth:api');
+        return response()->json(Department::latest()->get());
     }
-
-
-
-    //  below code is related to VUEjs crud
 
     public function storeDepartment(Request $request)
     {
-
         $request->validate([
-            'name' => ['required'],
-            'director_id' => ['required']
-
+            'name'          => ['required'],
+            'director_id'   => ['required']
         ]);
 
         Department::create([
-            'user_id' => 1,
-            'name' => $request->name,
-            'director_id' => $request->director_id,
-
+            'user_id'           => 1,
+            'director_id'       => $request->director_id,
+            'name'              => $request->name,
         ]);
 
-        return response()->json("success");
+        return response()->json('success');
     }
 
     public function updateDepartment(Request $request, $id)
     {
-
         $request->validate([
-            'name' => ['required'],
-            'director_id' => ['required']
-
+            'name'          => ['required'],
+            'director_id'   => ['required']
         ]);
-
 
         Department::where('id', $id)->update([
-            'name' => $request->name,
-            'director_id' => $request->director_id,
-
+            'director_id'       => $request->director_id,
+            'name'              => $request->name,
         ]);
 
-        return response()->json("success");
+        return response()->json('success');
     }
 
     public function deleteDepartment($id)
@@ -66,12 +59,8 @@ class DepartmentController extends Controller
     }
 
 
-    //  below code is related to laravel crud
-    public function getDepartments()
-    {
-        return response()->json(Department::latest()->get());
-    }
 
+    // below code is related to laravel crud
 
     public function index()
     {
@@ -86,21 +75,18 @@ class DepartmentController extends Controller
 
     public function store(Request $request)
     {
-
         $request->validate([
-            'name' => ['required'],
-            'director_id' => ['required']
-
+            'name'          => ['required'],
+            'director_id'   => ['required']
         ]);
 
         Department::create([
-            'user_id' => 1,
-            'name' => $request->name,
-            'director_id' => $request->director_id,
-
+            'user_id'           => 1,
+            'director_id'       => $request->director_id,
+            'name'              => $request->name,
         ]);
 
-        Session::flash('success-message', 'Department created sucessfully!');
+        Session::flash('success-message', 'Department created successfully!');
         return redirect()->route('departmentsIndex');
     }
 
@@ -112,29 +98,24 @@ class DepartmentController extends Controller
 
     public function update(Request $request, $id)
     {
-
-
         $request->validate([
-            'name' => ['required'],
-            'director_id' => ['required']
-
+            'name'          => ['required'],
+            'director_id'   => ['required']
         ]);
 
         Department::where('id', $id)->update([
-            'name' => $request->name,
-            'director_id' => $request->director_id,
-
+            'director_id'       => $request->director_id,
+            'name'              => $request->name,
         ]);
 
-        Session::flash('success-message', 'Department updated sucessfully!');
+        Session::flash('success-message', 'Department updated successfully!');
         return redirect()->route('departmentsIndex');
     }
 
     public function delete($id)
     {
         Department::where('id', $id)->delete();
-
-        Session::flash('success-message', 'Department deleted sucessfully!');
+        Session::flash('success-message', 'Department deleted successfully!');
         return redirect()->route('departmentsIndex');
     }
 }
