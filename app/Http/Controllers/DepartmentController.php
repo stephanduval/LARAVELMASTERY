@@ -102,6 +102,7 @@ class DepartmentController extends Controller
             'name'          => ['required'],
             'director_id'   => ['required']
         ]);
+        $this->middleware('auth:api');
 
         Department::where('id', $id)->update([
             'director_id'       => $request->director_id,
