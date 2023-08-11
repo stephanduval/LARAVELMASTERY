@@ -12,6 +12,12 @@ class DepartmentController extends Controller
 
 
 
+    function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
 
     //  below code is related to VUEjs crud
 
