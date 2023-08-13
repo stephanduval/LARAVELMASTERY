@@ -42,6 +42,8 @@ return [
     //     ],
     // ],
 
+    //TUTORIAL RECOMENDATION:
+
     'guards' => [
         'web' => [
             'driver' => 'session',
@@ -53,6 +55,22 @@ return [
             'provider' => 'users',
         ],
     ],
+
+
+    // CHAT GPT RECOMENDATION
+    // 'guards' => [
+    //     'web' => [
+    //         'driver' => 'session',
+    //         'provider' => 'users',
+    //     ],
+
+    //     'api' => [
+    //         'driver' => 'token',
+    //         'provider' => 'users',
+    //         'hash' => false,
+    //     ],
+    // ],
+
 
     /*
     |--------------------------------------------------------------------------
