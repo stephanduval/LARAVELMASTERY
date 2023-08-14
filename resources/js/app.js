@@ -1,6 +1,8 @@
 import "./bootstrap";
 
-import { createApp } from "vue/dist/vue.esm-bundler";
+import { createApp } from "vue";
+import { store } from "./store/store"; //it can also be store.js
+
 // WAS
 //import { createApp } from "Vue";
 import Departments from "./Components/Departments.vue";
@@ -13,5 +15,7 @@ app.component("departments", Departments);
 
 window.url = "/";
 // Global URL
+
+app.use(store);
 
 app.mount("#app");
