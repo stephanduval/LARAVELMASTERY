@@ -241,9 +241,10 @@ export default {
             // this.departmentData.director_id == ""
             //     ? (this.departmentErrors.director_id = true)
             //     : (this.departmentErrors.director_id = false);
-
             // if (this.departmentData.name && this.departmentData.director_id) {
             // axios
+            /*  The following code was Moved to the vuex departments.js store so that VueJs could control the CRUD */
+            /*
             this.departmentData
                 .post(
                     window.url + "api/storeDepartment"
@@ -254,6 +255,8 @@ export default {
                     $("#exampleModal").modal("hide");
                 });
             // }
+            */
+            this.$store.dispatch("storeDepartment", this.departmentData);
         },
         editDepartment(department) {
             console.log(department);
