@@ -2,10 +2,8 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div
-                    class="card-header bg-dark d-flex justify-content-between align-items-center position-relative"
-                >
-                    <h1 class="float-start text-light">Departments List</h1>
+                <div class="card-header bg-dark">
+                    <h5 class="float-start text-light">Departments List</h5>
                     <button
                         class="btn btn-success float-end"
                         @click="createDepartment"
@@ -14,12 +12,10 @@
                     </button>
                 </div>
                 <div class="card-body">
-                    <button @click="testAction" class="btn btn-info">
-                        test
-                    </button>
-                    {{ test }}
+                    <!-- <button @click="testAction" class="btn btn-info">test</button> -->
+                    <!-- {{test}} -->
                     <div class="table-responsive">
-                        <table class="table-hover text-center col-md-12">
+                        <table class="table table-hover text-center">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -30,9 +26,7 @@
                             </thead>
                             <tbody>
                                 <tr
-                                    v-for="(
-                                        department, index
-                                    ) in departmentsList"
+                                    v-for="(department, index) in departments"
                                     :key="index"
                                 >
                                     <td>{{ index + 1 }}</td>
@@ -45,7 +39,6 @@
                                         >
                                             <i class="fa fa-edit"></i>
                                         </button>
-
                                         <button
                                             class="btn btn-danger mx-1"
                                             @click="
@@ -72,7 +65,7 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5
-                                        class="modal-title fs-5"
+                                        class="modal-title"
                                         id="exampleModalLabel"
                                     >
                                         {{
@@ -89,7 +82,7 @@
                                     ></button>
                                 </div>
                                 <div class="modal-body">
-                                    <div class="row align-items-center">
+                                    <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="name">Name</label>
@@ -97,17 +90,13 @@
                                                     type="text"
                                                     class="form-control"
                                                     name="name"
-                                                    id=""
                                                     v-model="
                                                         departmentData.name
                                                     "
                                                 />
-                                                <!-- <p
-                                                    class="text-danger"
-                                                    v-if="departmentErrors.name"
-                                                >
-                                                    Name is required
-                                                </p> -->
+                                                <!-- <p class="text-danger" v-if="departmentErrors.name">
+                                            Name is required
+                                        </p> -->
                                                 <div
                                                     class="text-danger"
                                                     v-if="
@@ -145,14 +134,9 @@
                                                         HR Director
                                                     </option>
                                                 </select>
-                                                <!-- <p
-                                                    class="text-danger"
-                                                    v-if="
-                                                        departmentErrors.director_id
-                                                    "
-                                                >
-                                                    Director is required
-                                                </p> -->
+                                                <!-- <p class="text-danger" v-if="departmentErrors.director_id">
+                                            Director is required
+                                        </p> -->
                                                 <div
                                                     class="text-danger"
                                                     v-if="
@@ -187,7 +171,9 @@
                                         "
                                         class="btn btn-success"
                                     >
-                                        {{ !editMode ? "Store" : "Update" }}
+                                        {{
+                                            !editMode ? "Store" : "Save Changes"
+                                        }}
                                     </button>
                                 </div>
                             </div>
@@ -204,118 +190,62 @@ export default {
     data() {
         return {
             editMode: false,
-            departmentsList: {}, // Creates an empty array
             departmentData: new Form({
                 id: "",
-                department_id: "",
                 name: "",
                 director_id: "",
             }),
             departmentErrors: {
-                department_id: false,
                 name: false,
+                director_id: false,
             },
         };
     },
     methods: {
-        getDepartments() {
-            axios.get(window.url + "api/getDepartments").then((response) => {
-                console.log(response.data);
-                this.departmentsList = response.data;
-            });
-        },
         createDepartment() {
             this.editMode = false;
-            console.log("Edit Mode is:", this.editMode);
             this.departmentData.name = this.departmentData.director_id = "";
-            //Make the Form Boxes = ""  (EMPTY_)
             $("#exampleModal").modal("show");
         },
         storeDepartment() {
-            //logic for the Validation Comment <p></p> fields
-            // This turns on the validation error if there is one.
-            // Commented out after implmenting vform
-            // this.departmentData.name == ""
-            //     ? (this.departmentErrors.name = true)
-            //     : (this.departmentErrors.name = false);
-            // this.departmentData.director_id == ""
-            //     ? (this.departmentErrors.director_id = true)
-            //     : (this.departmentErrors.director_id = false);
-            // if (this.departmentData.name && this.departmentData.director_id) {
-            // axios
-            /*  The following code was Moved to the vuex departments.js store so that VueJs could control the CRUD */
-            /*
-            this.departmentData
-                .post(
-                    window.url + "api/storeDepartment"
-                    // , this.departmentData
-                )
-                .then((response) => {
-                    this.getDepartments();
-                    $("#exampleModal").modal("hide");
-                });
-            // }
-            */
+            // this.departmentData.name == '' ? this.departmentErrors.name = true : this.departmentErrors.name = false
+            // this.departmentData.director_id == '' ? this.departmentErrors.director_id = true : this.departmentErrors.director_id = false
+
+            // if(this.departmentData.name && this.departmentData.director_id) {
             this.$store.dispatch("storeDepartment", this.departmentData);
+            // }
         },
         editDepartment(department) {
-            console.log(department);
             this.editMode = true;
-            console.log("Edit Mode is:", this.editMode);
-
             this.departmentData.id = department.id;
             this.departmentData.name = department.name;
             this.departmentData.director_id = department.director_id;
-            ("department.");
             $("#exampleModal").modal("show");
         },
         updateDepartment() {
-            //logic for the Validation Comment <p></p> fields
-            // This turns on the validation error if there is one.
-            // Commented out after implmenting vform
-            // this.departmentData.name == ""
-            //     ? (this.departmentErrors.name = true)
-            //     : (this.departmentErrors.name = false);
-            // this.departmentData.director_id == ""
-            //     ? (this.departmentErrors.director_id = true)
-            //     : (this.departmentErrors.director_id = false);
+            // this.departmentData.name == '' ? this.departmentErrors.name = true : this.departmentErrors.name = false
+            // this.departmentData.director_id == '' ? this.departmentErrors.director_id = true : this.departmentErrors.director_id = false
 
-            // if (this.departmentData.name && this.departmentData.director_id) {
-            // axios
-            this.departmentData
-                .post(
-                    window.url +
-                        "api/updateDepartment/" +
-                        this.departmentData.id
-                    // ,
-                    // this.departmentData
-                )
-                .then((response) => {
-                    this.getDepartments();
-                    $("#exampleModal").modal("hide");
-                });
+            // if(this.departmentData.name && this.departmentData.director_id) {
+            this.$store.dispatch("updateDepartment", this.departmentData);
             // }
         },
         deleteDepartment(department) {
-            if (confirm("Are you sure you wanna delete department!")) {
-                axios
-                    .post(window.url + "api/deleteDepartment/" + department.id)
-                    .then(() => {
-                        this.getDepartments();
-                    });
-            }
+            this.$store.dispatch("deleteDepartment", department);
         },
-
-        testAction() {
-            this.$store.dispatch("testAction");
-        },
+        // testAction() {
+        //     this.$store.dispatch('testAction')
+        // }
     },
     mounted() {
-        this.getDepartments();
+        this.$store.dispatch("getDepartments");
     },
     computed: {
-        test() {
-            return this.$store.getters.test;
+        // test() {
+        //     return this.$store.getters.test
+        // },
+        departments() {
+            return this.$store.getters.departments;
         },
     },
 };
