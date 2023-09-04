@@ -21,6 +21,7 @@
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>Director</th>
+                                    <th>Db Id</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -32,6 +33,8 @@
                                     <td>{{ index + 1 }}</td>
                                     <td>{{ department.name }}</td>
                                     <td>{{ department.director_id }}</td>
+                                    <td>{{ department.id }}</td>
+
                                     <td>
                                         <button
                                             class="btn btn-success mx-1"
