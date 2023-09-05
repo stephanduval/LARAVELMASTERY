@@ -29,9 +29,11 @@
                             aria-controls="homeSubmenu">Management
                             <i class="fa fa-angle-down float-end mt-2"></i></a>
                         <ul class="collapse list-unstyled" id="homeSubmenu">
-                            <li>
-                                <a href="{{ route('departmentsIndex') }}">Departments</a>
-                            </li>
+                            @can('departments-read')
+                                <li>
+                                    <a href="{{ route('departmentsIndex') }}">Departments</a>
+                                </li>
+                            @endcan
                             <li>
                                 <a href="{{ route('usersIndex') }}">Users</a>
                             </li>
