@@ -46,7 +46,7 @@ class AuthServiceProvider extends ServiceProvider
             $permissions = Permission::all();
             foreach ($permissions as $permission) {
                 Gate::define($permission->name, function ($user) use ($permission) {
-                    return $user->hasRole($permission->name);
+                    return $user->hasPermission($permission->name);
                 });
             }
         } catch (\Exception $event) {

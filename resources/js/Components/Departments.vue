@@ -241,6 +241,12 @@ export default {
         // }
     },
     mounted() {
+        console.log(
+            "auth_role ",
+            window.auth_roles,
+            " auth_permission ",
+            window.auth_permissions
+        );
         this.$store.dispatch("getDepartments");
     },
     computed: {
