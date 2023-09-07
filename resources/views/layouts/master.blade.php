@@ -128,13 +128,10 @@
     {{-- If auth is true then it creates these department variables. --}}
     @auth
 
+
         <script>
-            var auth_roles = {
-                @json_encode(auth() - > user() - > roles)
-            };
-            var auth_permissions = {
-                @json_encode(auth() - > user() - > permissions)
-            };
+            window.auth_roles = {!! json_encode(auth()->user()->roles) !!};
+            window.auth_permissions = {!! json_encode(auth()->user()->permissions) !!};
         </script>
     @endauth
 
