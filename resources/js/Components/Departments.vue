@@ -7,6 +7,7 @@
                     <button
                         class="btn btn-success float-end"
                         @click="createDepartment"
+                        v-if="current_permissions.has('departments-create')"
                     >
                         New Department
                     </button>
@@ -20,9 +21,18 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
-                                    <th>Director</th>
-                                    <th>Db Id</th>
-                                    <th>Actions</th>
+                                    <th
+                                        v-if="
+                                            current_permissions.has(
+                                                'departments-update'
+                                            ) ||
+                                            current_permissions.has(
+                                                'departments-delete'
+                                            )
+                                        "
+                                    >
+                                        Actions
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -32,10 +42,16 @@
                                 >
                                     <td>{{ index + 1 }}</td>
                                     <td>{{ department.name }}</td>
-                                    <td>{{ department.director_id }}</td>
-                                    <td>{{ department.id }}</td>
-
-                                    <td>
+                                    <td
+                                        v-if="
+                                            current_permissions.has(
+                                                'departments-update'
+                                            ) ||
+                                            current_permissions.has(
+                                                'departments-delete'
+                                            )
+                                        "
+                                    >
                                         <button
                                             class="btn btn-success mx-1"
                                             @click="editDepartment(department)"
@@ -86,7 +102,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="name">Name</label>
                                                 <input
@@ -110,46 +126,6 @@
                                                     v-html="
                                                         departmentData.errors.get(
                                                             'name'
-                                                        )
-                                                    "
-                                                />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="director_id"
-                                                    >Director</label
-                                                >
-                                                <select
-                                                    name="director_id"
-                                                    class="form-control"
-                                                    v-model="
-                                                        departmentData.director_id
-                                                    "
-                                                >
-                                                    <option value="">
-                                                        Select a person
-                                                    </option>
-                                                    <option value="1">
-                                                        IT Director
-                                                    </option>
-                                                    <option value="2">
-                                                        HR Director
-                                                    </option>
-                                                </select>
-                                                <!-- <p class="text-danger" v-if="departmentErrors.director_id">
-                                            Director is required
-                                        </p> -->
-                                                <div
-                                                    class="text-danger"
-                                                    v-if="
-                                                        departmentData.errors.has(
-                                                            'director_id'
-                                                        )
-                                                    "
-                                                    v-html="
-                                                        departmentData.errors.get(
-                                                            'director_id'
                                                         )
                                                     "
                                                 />
@@ -196,18 +172,16 @@ export default {
             departmentData: new Form({
                 id: "",
                 name: "",
-                director_id: "",
             }),
             departmentErrors: {
                 name: false,
-                director_id: false,
             },
         };
     },
     methods: {
         createDepartment() {
             this.editMode = false;
-            this.departmentData.name = this.departmentData.director_id = "";
+            this.departmentData.name = "";
             $("#exampleModal").modal("show");
         },
         storeDepartment() {
@@ -222,7 +196,6 @@ export default {
             this.editMode = true;
             this.departmentData.id = department.id;
             this.departmentData.name = department.name;
-            this.departmentData.director_id = department.director_id;
             $("#exampleModal").modal("show");
         },
         updateDepartment() {
@@ -241,9 +214,8 @@ export default {
         // }
     },
     mounted() {
-        console.log("auth_role ", window.auth_roles);
-        console.log(" auth_permission ", window.auth_permissions);
         this.$store.dispatch("getDepartments");
+        this.$store.dispatch("getAuthRolesAndPermissions");
     },
     computed: {
         // test() {
@@ -251,6 +223,12 @@ export default {
         // },
         departments() {
             return this.$store.getters.departments;
+        },
+        current_roles() {
+            return this.$store.getters.current_roles;
+        },
+        current_permissions() {
+            return this.$store.getters.current_permissions;
         },
     },
 };
