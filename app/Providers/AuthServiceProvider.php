@@ -9,6 +9,7 @@ use Laravel\Passport\Passport;
 use App\Models\Role;
 use App\Models\Permission;
 
+
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -17,24 +18,24 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        //
+        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
     ];
 
     /**
      * Register any authentication / authorization services.
+     *
      * @return void
      */
     public function boot()
     {
+        $this->registerPolicies();
 
-        // $this->registerPolicies();
-
-
-        // if (!$this->app > routesAreCached()) {
+        // if (! $this->app->routesAreCached()) {
         //     Passport::routes();
         // }
 
         try {
+
             // all auth user role gates
             $roles = Role::all();
             foreach ($roles as $role) {
@@ -42,7 +43,8 @@ class AuthServiceProvider extends ServiceProvider
                     return $user->hasRole($role->name);
                 });
             }
-            // all auth user permission gates
+
+            // akk auth user permission gates
             $permissions = Permission::all();
             foreach ($permissions as $permission) {
                 Gate::define($permission->name, function ($user) use ($permission) {
