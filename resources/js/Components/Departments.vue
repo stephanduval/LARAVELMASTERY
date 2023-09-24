@@ -238,6 +238,8 @@ export default {
         // }
     },
     mounted() {
+        console.log("Roles", window.auth_roles);
+        console.log("Permissions", window.auth_permissions);
         this.$store.dispatch("getDepartments");
     },
     computed: {
