@@ -44,7 +44,7 @@ class AuthServiceProvider extends ServiceProvider
                 });
             }
 
-            // akk auth user permission gates
+            // all auth user permission gates
             $permissions = Permission::all();
             foreach ($permissions as $permission) {
                 Gate::define($permission->name, function ($user) use ($permission) {
