@@ -48,6 +48,10 @@ export const store = createStore({
         // testAction: (context) => {
         //     context.commit('testMutation')
         // }
+
+        getAuthRolesAndPermissions: (context) => {
+            context.commit("get_auth_roles_and_permission");
+        },
         getAuthRolesAndPermissions: (context) => {
             context.commit("get_auth_roles_and_permission");
         },

@@ -21,7 +21,18 @@
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>Director</th>
-                                    <th>Actions</th>
+                                    <th
+                                        v-if="
+                                            current_permissions.has(
+                                                'departments-update'
+                                            ) ||
+                                            current_permissions.has(
+                                                'departments-delete'
+                                            )
+                                        "
+                                    >
+                                        > Actions
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -32,7 +43,16 @@
                                     <td>{{ index + 1 }}</td>
                                     <td>{{ department.name }}</td>
                                     <td>{{ department.director_id }}</td>
-                                    <td>
+                                    <td
+                                        v-if="
+                                            current_permissions.has(
+                                                'departments-update'
+                                            ) ||
+                                            current_permissions.has(
+                                                'departments-delete'
+                                            )
+                                        "
+                                    >
                                         <button
                                             class="btn btn-success mx-1"
                                             @click="editDepartment(department)"
@@ -238,9 +258,10 @@ export default {
         // }
     },
     mounted() {
-        console.log("Roles", window.auth_roles);
-        console.log("Permissions", window.auth_permissions);
+        // console.log("Roles", window.auth_roles);
+        // console.log("Permissions", window.auth_permissions);
         this.$store.dispatch("getDepartments");
+        this.$store.dispatch("getAuthRolesAndPermissions");
     },
     computed: {
         // test() {
@@ -248,6 +269,12 @@ export default {
         // },
         departments() {
             return this.$store.getters.departments;
+        },
+        current_roles() {
+            return this.$store.getters.current_role;
+        },
+        current_permissions() {
+            return this.$store.getters.current_permissions;
         },
     },
 };
