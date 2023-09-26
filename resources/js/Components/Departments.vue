@@ -7,6 +7,7 @@
                     <button
                         class="btn btn-success float-end"
                         @click="createDepartment"
+                        v-if="current_permissions.has('departments-create')"
                     >
                         New Department
                     </button>
