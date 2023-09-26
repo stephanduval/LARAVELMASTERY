@@ -25,7 +25,7 @@
                 <a href="#"><img class="img logo mb-5" src={{ asset('/images/task_logo.png') }}></a>
                 <ul class="list-unstyled components mb-5">
                     @can('admin')
-                        <li class="active">
+                        <li class={{ Request::is('departments/index', 'users/index', 'roles/index') }}">
                             <a href="#homeSubmenu" data-bs-toggle="collapse" role="button" aria-expanded="false"
                                 aria-controls="homeSubmenu">Management
                                 <i class="fa fa-angle-down float-end mt-2"></i></a>
