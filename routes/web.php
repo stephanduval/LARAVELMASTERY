@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\PermissionController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -42,3 +45,7 @@ Route::post('departments/delete/{id}', [DepartmentController::class, 'delete'])-
 
 
 Route::get('users/index', [UserController::class, 'index'])->name('usersIndex');
+Route::get('roles/index', [RoleController::class, 'index'])->name('rolesIndex');
+Route::get('permissions/index', [PermissionController::class, 'index'])->name('permissionsIndex');
+
+
