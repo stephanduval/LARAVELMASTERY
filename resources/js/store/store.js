@@ -52,8 +52,8 @@ export const store = createStore({
         getAuthRolesAndPermissions: (context) => {
             context.commit("get_auth_roles_and_permission");
         },
-        getAuthRolesAndPermissions: (context) => {
-            context.commit("get_auth_roles_and_permission");
-        },
+        // getAuthRolesAndPermissions: (context) => {
+        //     context.commit("get_auth_roles_and_permission");
+        // },
     },
 });

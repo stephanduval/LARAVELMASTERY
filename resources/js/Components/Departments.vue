@@ -106,8 +106,11 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="name">Name</label>
+                                                <label for="departmentName"
+                                                    >Name</label
+                                                >
                                                 <input
+                                                    id="departmentName"
                                                     type="text"
                                                     class="form-control"
                                                     name="name"
@@ -224,6 +227,8 @@ export default {
     },
     methods: {
         createDepartment() {
+            console.log("created");
+
             this.editMode = false;
             this.departmentData.name = this.departmentData.director_id = "";
             $("#exampleModal").modal("show");
@@ -258,7 +263,7 @@ export default {
         //     this.$store.dispatch('testAction')
         // }
     },
-    mounted() {
+    mounted: function () {
         // console.log("Roles", window.auth_roles);
         // console.log("Permissions", window.auth_permissions);
         this.$store.dispatch("getDepartments");
