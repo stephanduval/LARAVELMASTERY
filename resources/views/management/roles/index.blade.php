@@ -10,9 +10,11 @@
                     <h2 class="text-light">Roles</h2>
                 </div>
                 <div class="col-md-6 text-right">
-                    <!-- Use text-right to align the button to the right -->
-                    <a href="{{ route('rolesCreate') }}" class="btn btn-success mt-1">
-                        Create New Role</a>
+                    @can('roles-create')
+                        <!-- Use text-right to align the button to the right -->
+                        <a href="{{ route('rolesCreate') }}" class="btn btn-success mt-1">
+                            Create New Role</a>
+                    @endcan
                 </div>
             </div>
         </div>
@@ -29,7 +31,9 @@
                             <th>Name</th>
                             <th>Display Name</th>
                             <th>Description</th>
-                            <th>Actions</th>
+                            @canany(['roles-update,roles-delete'])
+                                <th>Actions</th>
+                            @endcanany
                         </tr>
                     </thead>
                     <tbody>
@@ -39,30 +43,34 @@
                                 <td>{{ $role->name }}</td>
                                 <td>{{ $role->display_name }}</td>
                                 <td>{{ $role->description }}</td>
+                                @canany(['roles-update', 'roles-delete'])
+                                    <td>
+                                        @can('roles-update')
+                                            <div class="float-left mx-1">
 
-                                <td>
-                                    <div class="float-left mx-1">
+                                                <a href="{{ route('rolesEdit', $role->id) }}" class="btn btn-success">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                            </div>
+                                        @endcan
+                                        @can('roles-delete')
+                                            <div class="float-left mx-1">
 
-                                        <a href="{{ route('rolesEdit', $role->id) }}" class="btn btn-success">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                    </div>
-                                    <div class="float-left mx-1">
+                                                <form action="{{ route('rolesDelete', $role->id) }}" method="POST">
+                                                    @csrf
+                                                    <button class="btn btn-danger"> <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        @endcan
+                                    </td>
+                                @endcanany
+                            </tr>
+                        @endforeach
 
-                                        <form action="{{ route('rolesDelete', $role->id) }}" method="POST">
-                                            @csrf
-                                            <button class="btn btn-danger"> <i class="fa fa-trash"></i>
-                                            </button>
-                                        </form>
-                                    </div>
+                    </tbody>
+                </table>
             </div>
-            </td>
-            </tr>
-            @endforeach
-
-            </tbody>
-            </table>
         </div>
-    </div>
     </div>
 @endsection

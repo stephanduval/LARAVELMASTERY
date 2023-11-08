@@ -50,10 +50,13 @@ Route::get('roles/edit/{id}', [RoleController::class, 'edit'])->name('rolesEdit'
 Route::post('roles/update/{id}', [RoleController::class, 'update'])->name('rolesUpdate');
 Route::post('roles/delete/{id}', [RoleController::class, 'delete'])->name('rolesDelete');
 
+Route::get('permissions/index', [PermissionController::class, 'index'])->name('permissionsIndex');
+Route::get('permissions/create', [PermissionController::class, 'create'])->name('permissionsCreate');
+
+
 
 
 
 Route::get('users/index', [UserController::class, 'index'])->name('usersIndex');
-Route::get('permissions/index', [PermissionController::class, 'index'])->name('permissionsIndex');
 
 
