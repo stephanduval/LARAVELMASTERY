@@ -43,9 +43,17 @@ Route::get('departments/edit/{id}', [DepartmentController::class, 'edit'])->name
 Route::post('departments/update/{id}', [DepartmentController::class, 'update'])->name('departmentsUpdate');
 Route::post('departments/delete/{id}', [DepartmentController::class, 'delete'])->name('departmentsDelete');
 
+Route::get('roles/index', [RoleController::class, 'index'])->name('rolesIndex');
+Route::get('roles/create', [RoleController::class, 'create'])->name('rolesCreate');
+Route::post('roles/store', [RoleController::class, 'store'])->name('rolesStore');
+Route::get('roles/edit/{id}', [RoleController::class, 'edit'])->name('rolesEdit');
+Route::post('roles/update/{id}', [RoleController::class, 'update'])->name('rolesUpdate');
+Route::post('roles/delete/{id}', [RoleController::class, 'delete'])->name('rolesDelete');
+
+
+
 
 Route::get('users/index', [UserController::class, 'index'])->name('usersIndex');
-Route::get('roles/index', [RoleController::class, 'index'])->name('rolesIndex');
 Route::get('permissions/index', [PermissionController::class, 'index'])->name('permissionsIndex');
 
 

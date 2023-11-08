@@ -25,10 +25,10 @@
                                     <th
                                         v-if="
                                             current_permissions.has(
-                                                'departments-update'
+                                                'departments-update',
                                             ) ||
                                             current_permissions.has(
-                                                'departments-delete'
+                                                'departments-delete',
                                             )
                                         "
                                     >
@@ -47,10 +47,10 @@
                                     <td
                                         v-if="
                                             current_permissions.has(
-                                                'departments-update'
+                                                'departments-update',
                                             ) ||
                                             current_permissions.has(
-                                                'departments-delete'
+                                                'departments-delete',
                                             )
                                         "
                                     >
@@ -125,12 +125,12 @@
                                                     class="text-danger"
                                                     v-if="
                                                         departmentData.errors.has(
-                                                            'name'
+                                                            'name',
                                                         )
                                                     "
                                                     v-html="
                                                         departmentData.errors.get(
-                                                            'name'
+                                                            'name',
                                                         )
                                                     "
                                                 />
@@ -165,12 +165,12 @@
                                                     class="text-danger"
                                                     v-if="
                                                         departmentData.errors.has(
-                                                            'director_id'
+                                                            'director_id',
                                                         )
                                                     "
                                                     v-html="
                                                         departmentData.errors.get(
-                                                            'director_id'
+                                                            'director_id',
                                                         )
                                                     "
                                                 />

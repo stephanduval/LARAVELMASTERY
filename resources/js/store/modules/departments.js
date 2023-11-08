@@ -41,7 +41,9 @@ export default {
             if (confirm("Are you sure you wanna delete department!")) {
                 axios
                     .post(
-                        window.url + "api/deleteDepartment/" + departmentData.id
+                        window.url +
+                            "api/deleteDepartment/" +
+                            departmentData.id,
                     )
                     .then(() => {
                         context.dispatch("getDepartments");
