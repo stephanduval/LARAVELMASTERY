@@ -7,9 +7,10 @@
         </div>
     </div>
     <div class="card-body">
-        <form action="{{ route('rolesStore') }}" method="POST">
+        <form action="{{ route('permissionsStore') }}" method="POST">
             @csrf
             <permissions-create></permissions-create>
+            <button type="submit" class="btn btn-success float-right">Save</button>
         </form>
     </div>
     </div>

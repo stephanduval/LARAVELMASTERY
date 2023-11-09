@@ -18,4 +18,21 @@ class PermissionController extends Controller
     {
         return view('management.permissions.create');
     }
+
+    public function store(Request $request)
+    {
+        // return $request->all();
+
+        if($request->permission_type == 'basic') {
+            $request->validate([
+                'name' => 'required'
+                'display_name' => 'required'
+                'description' => 'required'
+            ]);
+
+        } else if($request->permissions_type == 'crud') {
+
+        }
+        }
+    }
 }

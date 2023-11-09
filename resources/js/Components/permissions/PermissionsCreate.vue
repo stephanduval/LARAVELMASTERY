@@ -57,6 +57,12 @@
                 />
             </div>
         </div>
+
+        <input
+            type="hidden"
+            name="crudSelected[]"
+            v-model="permissionData.crudSelected"
+        />
     </div>
 
     <div
@@ -81,7 +87,7 @@
                     type="checkbox"
                     class="form-check-input"
                     id="inlinecheckbox1"
-                    name="crudSelected"
+                    name="crudSelected[]"
                     v-model="permissionData.crudSelected"
                     value="create"
                 />
@@ -94,7 +100,7 @@
                     type="checkbox"
                     class="form-check-input"
                     id="inlinecheckbox2"
-                    name="crudSelected"
+                    name="crudSelected[]"
                     v-model="permissionData.crudSelected"
                     value="read"
                 />
@@ -107,7 +113,7 @@
                     type="checkbox"
                     class="form-check-input"
                     id="inlinecheckbox3"
-                    name="crudSelected"
+                    name="crudSelected[]"
                     v-model="permissionData.crudSelected"
                     value="update"
                 />
@@ -120,7 +126,7 @@
                     type="checkbox"
                     class="form-check-input"
                     id="inlinecheckbox4"
-                    name="crudSelected"
+                    name="crudSelected[]"
                     v-model="permissionData.crudSelected"
                     value="delete"
                 />
@@ -132,19 +138,16 @@
     </div>
 
     <div class="row">
-        <div class="form-group">
-            <button type="submit" class="btn btn-success float-right">
-                Save
-            </button>
-        </div>
+        <div class="form-group"></div>
     </div>
-    <div class="row">
+    <div class="row" v-if="permissionData.crudType == 'crud'">
         <div class="col-md-12">
             <div
                 class="row"
                 v-if="
                     permissionData.resource.length >= 3 &&
-                    permissionData.crudSelected.length > 0
+                    permissionData.crudSelected.length > 0 &&
+                    permissionData.crudType == 'crud'
                 "
             >
                 <table class="table">
