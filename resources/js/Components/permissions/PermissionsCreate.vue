@@ -6,7 +6,7 @@
                     type="radio"
                     class="form-check-input"
                     id="inlineradio1"
-                    name="crudSelected"
+                    name="crudType"
                     v-model="permissionData.crudType"
                     value="basic"
                 />
@@ -17,7 +17,7 @@
                     type="radio"
                     class="form-check-input"
                     id="inlineradio2"
-                    name="crudSelected"
+                    name="crudType"
                     v-model="permissionData.crudType"
                     value="crud"
                 />
@@ -57,12 +57,6 @@
                 />
             </div>
         </div>
-
-        <input
-            type="hidden"
-            name="crudSelected[]"
-            v-model="permissionData.crudSelected"
-        />
     </div>
 
     <div
@@ -135,6 +129,8 @@
                 >
             </div>
         </div>
+        <!-- Eliminated because it created a null value in the array -->
+        <!-- <input type="hidden" name="crudSelected[]" /> -->
     </div>
 
     <div class="row">
