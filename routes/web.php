@@ -43,6 +43,7 @@ Route::get('departments/edit/{id}', [DepartmentController::class, 'edit'])->name
 Route::post('departments/update/{id}', [DepartmentController::class, 'update'])->name('departmentsUpdate');
 Route::post('departments/delete/{id}', [DepartmentController::class, 'delete'])->name('departmentsDelete');
 
+
 Route::get('roles/index', [RoleController::class, 'index'])->name('rolesIndex');
 Route::get('roles/create', [RoleController::class, 'create'])->name('rolesCreate');
 Route::post('roles/store', [RoleController::class, 'store'])->name('rolesStore');
