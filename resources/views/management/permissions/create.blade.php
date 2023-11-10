@@ -10,8 +10,10 @@
         <form action="{{ route('permissionsStore') }}" method="POST">
             @csrf
             <permissions-create></permissions-create>
-            <button type="submit" class="btn btn-success float-right">Save</button>
+            <div class="btn-container float-right">
+                <button type="submit" class="btn btn-success">Save</button>
+                <a href="{{ route('permissionsIndex') }}" class="btn btn-danger ml-2">Cancel</a>
+            </div>
         </form>
-    </div>
     </div>
 @endsection

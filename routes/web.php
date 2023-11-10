@@ -34,7 +34,7 @@ Route::get('users/index', function () {
 });
 */
 
-Route::get('/', [HomeController::class, 'dashboard']);
+Route::get('/', [HomeController::class, 'dashboard'])->name('dashboard');
 
 Route::get('departments/index', [DepartmentController::class, 'index'])->name('departmentsIndex');
 Route::get('departments/create', [DepartmentController::class, 'create'])->name('departmentsCreate');

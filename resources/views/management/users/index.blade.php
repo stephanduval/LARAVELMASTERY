@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
 @section('content')
-    <h1>Users</h1>
-
+    <Users />
+    {{-- OLD LARAVEL WAY OF PRESENTING THE TABLE --}}
 @endsection

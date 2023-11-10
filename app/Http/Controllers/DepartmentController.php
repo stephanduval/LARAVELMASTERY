@@ -24,14 +24,12 @@ class DepartmentController extends Controller
     public function storeDepartment(Request $request)
     {
         $request->validate([
-            'name'          => ['required'],
-            'director_id'   => ['required']
+            'name' => ['required'],
         ]);
 
         Department::create([
-            'user_id'           => 1,
-            'director_id'       => $request->director_id,
-            'name'              => $request->name,
+            'user_id' => 1,
+            'name' => $request->name,
         ]);
 
         return response()->json('success');
@@ -40,13 +38,11 @@ class DepartmentController extends Controller
     public function updateDepartment(Request $request, $id)
     {
         $request->validate([
-            'name'          => ['required'],
-            'director_id'   => ['required']
+            'name' => ['required'],
         ]);
 
         Department::where('id', $id)->update([
-            'director_id'       => $request->director_id,
-            'name'              => $request->name,
+            'name' => $request->name,
         ]);
 
         return response()->json('success');
@@ -76,14 +72,12 @@ class DepartmentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'          => ['required'],
-            'director_id'   => ['required']
+            'name' => ['required'],
         ]);
 
         Department::create([
-            'user_id'           => 1,
-            'director_id'       => $request->director_id,
-            'name'              => $request->name,
+            'user_id' => 1,
+            'name' => $request->name,
         ]);
 
         Session::flash('success-message', 'Department created successfully!');
@@ -99,14 +93,12 @@ class DepartmentController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name'          => ['required'],
-            'director_id'   => ['required']
+            'name' => ['required'],
         ]);
         $this->middleware('auth:api');
 
         Department::where('id', $id)->update([
-            'director_id'       => $request->director_id,
-            'name'              => $request->name,
+            'name' => $request->name,
         ]);
 
         Session::flash('success-message', 'Department updated successfully!');

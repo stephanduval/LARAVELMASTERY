@@ -3,20 +3,20 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header bg-dark">
-                    <h5 class="float-start text-light">Departments List</h5>
+                    <h5 class="float-start text-light">Users List</h5>
                     <button
                         class="btn btn-success float-end"
-                        @click="createDepartment"
-                        v-if="current_permissions.has('departments-create')"
+                        @click="createUser"
+                        v-if="current_permissions.has('users-create')"
                     >
-                        New Department
+                        New User
                     </button>
                 </div>
                 <div class="card-body">
                     <!-- <button @click="testAction" class="btn btn-info">test</button> -->
                     <!-- {{test}} -->
                     <div class="table-responsive">
-                        <table class="table table-hover text-center">
+                        <!-- <table class="table table-hover text-center">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -69,7 +69,7 @@
                                     </td>
                                 </tr>
                             </tbody>
-                        </table>
+                        </table> -->
                     </div>
 
                     <!-- Modal -->

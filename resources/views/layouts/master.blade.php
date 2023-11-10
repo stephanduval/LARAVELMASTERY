@@ -27,48 +27,54 @@
                     @can('admin')
                         {{-- <li class={{ Request::is('departments/index', 'users/index', 'roles/index', '/') }}">
                             <a href="#homeSubmenu" data-bs-toggle="collapse" role="button" aria-expanded="false" --}}
-  {{-- <li class="@if(Request::is('departments/index', 'users/index', 'roles/index')) active @endif">
-    <a href="#homeSubmenu" data-bs-toggle="collapse" role="button" aria-expanded="@if(Request::is('departments/index', 'users/index', 'roles/index')) true @else false @endif" --}}
-    {{-- <li class="@if(Request::is('departments/index', 'users/index', 'roles/index')) active @else false @endif">
+                        {{-- <li class="@if (Request::is('departments/index', 'users/index', 'roles/index')) active @endif">
+    <a href="#homeSubmenu" data-bs-toggle="collapse" role="button" aria-expanded="@if (Request::is('departments/index', 'users/index', 'roles/index')) true @else false @endif" --}}
+                        {{-- <li class="@if (Request::is('departments/index', 'users/index', 'roles/index')) active @else false @endif">
     <a href="#homeSubmenu" data-bs-toggle="collapse" role="button" aria-expanded="false" --}}
 
 
-    {{-- <li class={{ Request::is('departments/index', 'users/index', 'roles/index', '/') }}">
+                        {{-- <li class={{ Request::is('departments/index', 'users/index', 'roles/index', '/') }}">
                             <a href="#homeSubmenu" data-bs-toggle="collapse" role="button" aria-expanded="false"
 
                                 aria-controls="homeSubmenu"> Management
                                 <i class="fa fa-angle-down float-end mt-2"></i></a> --}}
 
-<li class="{{ Request::is('departments/index', 'users/index', 'roles/index', 'permissions/index') ? 'active' : '' }}">
-    <a href="#homeSubmenu" data-bs-toggle="{{ Request::is('departments/index', 'users/index', 'roles/index', 'permissions/index', '/') ? 'collapse' : '' }}" role="button" aria-expanded="{{ Request::is('departments/index', 'users/index', 'roles/index', '/') ? 'false' : 'true' }}" aria-controls="homeSubmenu">
-        Management
-        <i class="fa fa-angle-down float-end mt-2"></i>
-    </a>
-</li>
+                        <li
+                            class="{{ Request::is('departments/index', 'users/index', 'roles/index', 'permissions/index') ? 'active' : '' }}">
+                            <a href="#homeSubmenu"
+                                data-bs-toggle="{{ Request::is('departments/index', 'users/index', 'roles/index', 'permissions/index', '/') ? 'collapse' : '' }}"
+                                role="button"
+                                aria-expanded="{{ Request::is('departments/index', 'users/index', 'roles/index', '/') ? 'false' : 'true' }}"
+                                aria-controls="homeSubmenu">
+                                Management
+                                <i class="fa fa-angle-down float-end mt-2"></i>
+                            </a>
+                        </li>
 
-                            <ul class="{{ Request::is('departments/index', 'users/index', 'roles/index','permissions/index') ? 'collapse list-unstyled show' : 'collapse list-unstyled' }}" id="homeSubmenu" >
-                                @can('departments-read')
-                                    <li class="{{ Request::is('departments/index') ? 'active' : '' }}">
-                                        <a href="{{ route('departmentsIndex') }}">Departments</a>
-                                    </li>
-                                @endcan
-                                @can('users-read')
-                                    <li class="{{ Request::is('users/index') ? 'active' : '' }}">
-                                        <a href="{{ route('usersIndex') }}">Users</a>
-                                    </li>
-                                @endcan
-                                @can('roles-read')
-                                    <li class="{{ Request::is('roles/index') ? 'active' : '' }}">
-                                        <a href="{{ route('rolesIndex') }}">Roles</a>
-                                    </li>
-                                @endcan
-                                @can('permissions-read')
-                                    <li class="{{ Request::is('permissions/index') ? 'active' : '' }}">
-                                        <a href="{{ route('permissionsIndex') }}">Permissions</a>
-                                    </li>
-                                @endcan
+                        <ul class="{{ Request::is('departments/index', 'users/index', 'roles/index', 'permissions/index') ? 'collapse list-unstyled show' : 'collapse list-unstyled' }}"
+                            id="homeSubmenu">
+                            @can('departments-read')
+                                <li class="{{ Request::is('departments/index') ? 'active' : '' }}">
+                                    <a href="{{ route('departmentsIndex') }}">Departments</a>
+                                </li>
+                            @endcan
+                            @can('roles-read')
+                                <li class="{{ Request::is('roles/index') ? 'active' : '' }}">
+                                    <a href="{{ route('rolesIndex') }}">Roles</a>
+                                </li>
+                            @endcan
+                            @can('permissions-read')
+                                <li class="{{ Request::is('permissions/index') ? 'active' : '' }}">
+                                    <a href="{{ route('permissionsIndex') }}">Permissions</a>
+                                </li>
+                            @endcan
+                            @can('users-read')
+                                <li class="{{ Request::is('users/index') ? 'active' : '' }}">
+                                    <a href="{{ route('usersIndex') }}">Users</a>
+                                </li>
+                            @endcan
 
-                            </ul>
+                        </ul>
                         </li>
                     @endcan
                     <li>

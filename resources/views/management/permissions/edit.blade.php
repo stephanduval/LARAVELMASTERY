@@ -31,11 +31,15 @@
                             value="{{ $permission->description }}">
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <div class="form-group">
+                        <a href="{{ route('permissionsIndex') }}" class="btn btn-danger ml-2 float-right">Cancel</a>
+
                         <button type="submit" class="btn btn-success float-right">
                             Save Changes
                         </button>
+
+
                     </div>
                 </div>
             </div>
