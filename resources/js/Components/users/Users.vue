@@ -89,8 +89,8 @@
                                     >
                                         {{
                                             !editMode
-                                                ? "Create Department"
-                                                : "Update Department"
+                                                ? "Create User"
+                                                : "Update User"
                                         }}
                                     </h5>
                                     <button
@@ -102,7 +102,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="row">
-                                        <div class="col-md-12">
+                                        <!-- <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="departmentName"
                                                     >Name</label
@@ -131,8 +131,8 @@
                                                     "
                                                 />
                                             </div>
-                                        </div>
-                                        <!-- <div class="col-md-6">
+                                        </div> -->
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="director_id"
                                                     >Director</label
@@ -169,7 +169,7 @@
                                                     "
                                                 />
                                             </div>
-                                        </div> -->
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -208,26 +208,26 @@ export default {
     data() {
         return {
             editMode: false,
-            departmentData: new Form({
+            userData: new Form({
                 id: "",
                 name: "",
                 director_id: "",
             }),
-            departmentErrors: {
+            userErrors: {
                 name: false,
                 director_id: false,
             },
         };
     },
     methods: {
-        createDepartment() {
+        createUser() {
             console.log("created");
 
             this.editMode = false;
             this.departmentData.name = "";
             $("#exampleModal").modal("show");
         },
-        storeDepartment() {
+        storeUser() {
             // this.departmentData.name == '' ? this.departmentErrors.name = true : this.departmentErrors.name = false
             // this.departmentData.director_id == '' ? this.departmentErrors.director_id = true : this.departmentErrors.director_id = false
 
@@ -235,13 +235,13 @@ export default {
             this.$store.dispatch("storeDepartment", this.departmentData);
             // }
         },
-        editDepartment(department) {
+        editUser(user) {
             this.editMode = true;
-            this.departmentData.id = department.id;
-            this.departmentData.name = department.name;
+            this.userData.id = user.id;
+            this.userData.name = user.name;
             $("#exampleModal").modal("show");
         },
-        updateDepartment() {
+        updateUser() {
             // this.departmentData.name == '' ? this.departmentErrors.name = true : this.departmentErrors.name = false
             // this.departmentData.director_id == '' ? this.departmentErrors.director_id = true : this.departmentErrors.director_id = false
 
@@ -249,7 +249,7 @@ export default {
             this.$store.dispatch("updateDepartment", this.departmentData);
             // }
         },
-        deleteDepartment(department) {
+        deleteUser(department) {
             this.$store.dispatch("deleteDepartment", department);
         },
         // testAction() {
@@ -262,19 +262,6 @@ export default {
         this.$store.dispatch("getDepartments");
         this.$store.dispatch("getAuthRolesAndPermissions");
     },
-    computed: {
-        // test() {
-        //     return this.$store.getters.test
-        // },
-        departments() {
-            return this.$store.getters.departments;
-        },
-        current_roles() {
-            return this.$store.getters.current_role;
-        },
-        current_permissions() {
-            return this.$store.getters.current_permissions;
-        },
-    },
+    computed: {},
 };
 </script>
