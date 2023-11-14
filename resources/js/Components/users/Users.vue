@@ -24,10 +24,10 @@
                                     <th
                                         v-if="
                                             current_permissions.has(
-                                                'departments-update',
+                                                'users-update',
                                             ) ||
                                             current_permissions.has(
-                                                'departments-delete',
+                                                'users-delete',
                                             )
                                         "
                                     >
@@ -102,37 +102,86 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="row">
-                                        <!-- <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="departmentName"
-                                                    >Name</label
-                                                >
-                                                <input
-                                                    id="departmentName"
-                                                    type="text"
-                                                    class="form-control"
-                                                    name="name"
-                                                    v-model="
-                                                        departmentData.name
-                                                    "
-                                                />
+                                        <div class="col md-3"></div>
+                                        <div class="form-group">
+                                            <label for="name">Name</label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                v-model="userData.name"
+                                            />
+                                            <div
+                                                class="text-danger"
+                                                v-if="
+                                                    userData.errors.has('name')
+                                                "
+                                            ></div>
+                                        </div>
+                                        <div class="col md-3"></div>
 
-                                                <div
-                                                    class="text-danger"
-                                                    v-if="
-                                                        departmentData.errors.has(
-                                                            'name',
-                                                        )
-                                                    "
-                                                    v-html="
-                                                        departmentData.errors.get(
-                                                            'name',
-                                                        )
-                                                    "
-                                                />
-                                            </div>
-                                        </div> -->
-                                        <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name">Email</label>
+                                            <input
+                                                type="email"
+                                                class="form-control"
+                                                v-model="userData.email"
+                                            />
+                                            <div
+                                                class="text-danger"
+                                                v-if="
+                                                    userData.errors.has('email')
+                                                "
+                                            ></div>
+                                        </div>
+                                    </div>
+                                    <div class="col md-3"></div>
+
+                                    <div class="form-group">
+                                        <label for="name">Password</label>
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            v-model="userData.password"
+                                        />
+                                        <div
+                                            class="text-danger"
+                                            v-if="
+                                                userData.errors.get('password')
+                                            "
+                                        ></div>
+                                    </div>
+                                    <div class="col md-3"></div>
+
+                                    <div class="form-group">
+                                        <label for="department_id"
+                                            >Department</label
+                                        >
+
+                                        <div
+                                            class="text-danger"
+                                            v-if="userData.errors.has('name')"
+                                        ></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="departmentName">Name</label>
+                                        <input
+                                            id="departmentName"
+                                            type="text"
+                                            class="form-control"
+                                            name="name"
+                                            v-model="userData.name"
+                                        />
+
+                                        <div
+                                            class="text-danger"
+                                            v-if="userData.errors.has('name')"
+                                            v-html="userData.errors.get('name')"
+                                        />
+                                    </div>
+                                </div>
+                                <!-- <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="director_id"
                                                     >Director</label
@@ -169,32 +218,24 @@
                                                     "
                                                 />
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button
-                                        type="button"
-                                        class="btn btn-secondary"
-                                        data-bs-dismiss="modal"
-                                    >
-                                        Close
-                                    </button>
-                                    <button
-                                        type="button"
-                                        @click="
-                                            !editMode
-                                                ? storeDepartment()
-                                                : updateDepartment()
-                                        "
-                                        class="btn btn-success"
-                                    >
-                                        {{
-                                            !editMode ? "Store" : "Save Changes"
-                                        }}
-                                    </button>
-                                </div>
+                                        </div> -->
                             </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button
+                                type="button"
+                                class="btn btn-secondary"
+                                data-bs-dismiss="modal"
+                            >
+                                Close
+                            </button>
+                            <button
+                                type="button"
+                                @click="!editMode ? storeUSer() : updateUser()"
+                                class="btn btn-success"
+                            >
+                                {{ !editMode ? "Store" : "Save Changes" }}
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -211,12 +252,7 @@ export default {
             userData: new Form({
                 id: "",
                 name: "",
-                director_id: "",
             }),
-            userErrors: {
-                name: false,
-                director_id: false,
-            },
         };
     },
     methods: {
@@ -224,7 +260,7 @@ export default {
             console.log("created");
 
             this.editMode = false;
-            this.departmentData.name = "";
+            this.userData.name = "";
             $("#exampleModal").modal("show");
         },
         storeUser() {
@@ -235,10 +271,10 @@ export default {
             this.$store.dispatch("storeDepartment", this.departmentData);
             // }
         },
-        editUser(user) {
+        editUser(department) {
             this.editMode = true;
-            this.userData.id = user.id;
-            this.userData.name = user.name;
+            this.userData.id = department.id;
+            this.userData.name = department.name;
             $("#exampleModal").modal("show");
         },
         updateUser() {
@@ -246,11 +282,11 @@ export default {
             // this.departmentData.director_id == '' ? this.departmentErrors.director_id = true : this.departmentErrors.director_id = false
 
             // if(this.departmentData.name && this.departmentData.director_id) {
-            this.$store.dispatch("updateDepartment", this.departmentData);
+            this.$store.dispatch("updateUser", this.userData);
             // }
         },
-        deleteUser(department) {
-            this.$store.dispatch("deleteDepartment", department);
+        deleteDepartment(department) {
+            this.$store.dispatch("deleteUser", userData.id);
         },
         // testAction() {
         //     this.$store.dispatch('testAction')
@@ -259,9 +295,22 @@ export default {
     mounted: function () {
         // console.log("Roles", window.auth_roles);
         // console.log("Permissions", window.auth_permissions);
-        this.$store.dispatch("getDepartments");
+        this.$store.dispatch("getUsers");
         this.$store.dispatch("getAuthRolesAndPermissions");
     },
-    computed: {},
+    computed: {
+        // test() {
+        //     return this.$store.getters.test
+        // },
+        // departments() {
+        //     return this.$store.getters.users;
+        // },
+        // current_roles() {
+        //     return this.$store.getters.current_role;
+        // },
+        current_permissions() {
+            return this.$store.getters.current_permissions;
+        },
+    },
 };
 </script>

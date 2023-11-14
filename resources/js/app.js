@@ -12,6 +12,9 @@ import existingApp from "./app";
 import Form from "vform";
 window.Form = Form;
 
+import Multiselect from "@vueform/multiselect";
+import "@vueform/multiselect/themes/default.css";
+
 const app = createApp({});
 
 app.component("departments", Departments);

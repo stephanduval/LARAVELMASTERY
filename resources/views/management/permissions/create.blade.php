@@ -3,7 +3,7 @@
 @section('content')
     <div class="card">
         <div class="card-header bg-dark">
-            <h5 class="text-light">Create Permission</h5>
+            <h5 class="text-light">Create New Permission</h5>
         </div>
     </div>
     <div class="card-body">
