@@ -20,6 +20,7 @@ const app = createApp({});
 app.component("departments", Departments);
 app.component("permissions-create", PermissionsCreate); // Use kebab-case here
 app.component("users", Users); // Use kebab-case here
+app.component("multi-select", Multiselect);
 
 window.url = "/";
 // Global URL
