@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApiController;
 use App\Http\Controllers\DepartmentController;
 
 /*
@@ -22,9 +23,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth:api')->group(
     function () {
 
-        Route::get('getDepartments', [DepartmentController::class, 'getDepartments']);
+        Route::get('getDepartments', [DepartmentController::class, 'getDepartments'])->middleware('auth:api');
         Route::post('storeDepartment', [DepartmentController::class, 'storeDepartment']);
         Route::post('updateDepartment/{id}', [DepartmentController::class, 'updateDepartment']);
         Route::post('deleteDepartment/{id}', [DepartmentController::class, 'deleteDepartment']);
+        Route::get('getAllDepartments', [ApiController::class, 'getAllDepartments'])->middleware('auth:api');
     }
 );

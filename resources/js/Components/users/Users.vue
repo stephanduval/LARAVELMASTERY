@@ -80,7 +80,9 @@
                         aria-labelledby="exampleModalLabel"
                         aria-hidden="true"
                     >
-                        <div class="modal-dialog modal-dialog-centered">
+                        <div
+                            class="modal-dialog modal-xl modal-dialog-centered"
+                        >
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5
@@ -156,6 +158,19 @@
                                         <label for="department_id"
                                             >Department</label
                                         >
+                                        <multi-select
+                                            v-model="userData.department_id"
+                                            :options="filtered_departments"
+                                            :searchable="true"
+                                        />
+                                        <!-- Interesting unusued multi-select options -->
+                                        <!-- :close-on-select="true"
+                                            :clear-on-select="false"
+                                            :preserve-search="true"
+                                            placeholder="Select Department"
+                                            label="name"
+                                            track-by="id"
+                                            :preselect-first="false"  -->
 
                                         <div
                                             class="text-danger"
@@ -163,24 +178,7 @@
                                         ></div>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="departmentName">Name</label>
-                                        <input
-                                            id="departmentName"
-                                            type="text"
-                                            class="form-control"
-                                            name="name"
-                                            v-model="userData.name"
-                                        />
 
-                                        <div
-                                            class="text-danger"
-                                            v-if="userData.errors.has('name')"
-                                            v-html="userData.errors.get('name')"
-                                        />
-                                    </div>
-                                </div>
                                 <!-- <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="director_id"
@@ -251,10 +249,15 @@ export default {
             editMode: false,
             userData: new Form({
                 id: "",
+                department_id: "", // added department_id
                 name: "",
+                email: "", // added email
+                password: "", // added password
             }),
         };
     },
+    // rest of the code...
+
     methods: {
         createUser() {
             console.log("created");
@@ -293,9 +296,7 @@ export default {
         // }
     },
     mounted: function () {
-        // console.log("Roles", window.auth_roles);
-        // console.log("Permissions", window.auth_permissions);
-        this.$store.dispatch("getUsers");
+        this.$store.dispatch("getAllDepartments");
         this.$store.dispatch("getAuthRolesAndPermissions");
     },
     computed: {
