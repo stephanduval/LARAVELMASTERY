@@ -1,11 +1,24 @@
 import axios from "axios";
 
 export default {
-    state: {},
-    getters: {},
+    state: {
+        filtered_departments: [],
+    },
+    getters: {
+        filtered_departments(state) {
+            return state.filtered_departments;
+        },
+    },
     mutations: {
         set_all_departments: (state, data) => {
-            console.log(data);
+            state.filtered_departments = [];
+            data.forEach((department) =>
+                state.filtered_departments.push({
+                    value: department.id,
+                    label: department.name,
+                }),
+            );
+            // console.log(data);
         },
     },
 

@@ -9,6 +9,6 @@ class ApiController extends Controller
 {
     public function getAllDepartments()
     {
-        return response()->json(Department::all);
+        return response()->json(Department::all());
     }
 }

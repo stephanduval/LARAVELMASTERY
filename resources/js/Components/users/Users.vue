@@ -300,15 +300,18 @@ export default {
         this.$store.dispatch("getAuthRolesAndPermissions");
     },
     computed: {
+        filtered_departments() {
+            return this.$store.getters.filtered_departments;
+        },
         // test() {
         //     return this.$store.getters.test
         // },
         // departments() {
         //     return this.$store.getters.users;
         // },
-        // current_roles() {
-        //     return this.$store.getters.current_role;
-        // },
+        current_roles() {
+            return this.$store.getters.current_role;
+        },
         current_permissions() {
             return this.$store.getters.current_permissions;
         },
