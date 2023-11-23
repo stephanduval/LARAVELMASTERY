@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\ApiController;
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -27,6 +28,8 @@ Route::middleware('auth:api')->group(
         Route::post('storeDepartment', [DepartmentController::class, 'storeDepartment']);
         Route::post('updateDepartment/{id}', [DepartmentController::class, 'updateDepartment']);
         Route::post('deleteDepartment/{id}', [DepartmentController::class, 'deleteDepartment']);
+
         Route::get('getAllDepartments', [ApiController::class, 'getAllDepartments'])->middleware('auth:api');
+        Route::get('getAllRoles', [ApiController::class, 'getAllRoles'])->middleware('auth:api');
     }
 );

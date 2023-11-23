@@ -3,10 +3,14 @@ import axios from "axios";
 export default {
     state: {
         filtered_departments: [],
+        filtered_roles: [],
     },
     getters: {
         filtered_departments(state) {
             return state.filtered_departments;
+        },
+        filtered_roles(state) {
+            return state.filtered_roles;
         },
     },
     mutations: {
@@ -20,12 +24,27 @@ export default {
             );
             // console.log(data);
         },
+        set_all_roles: (state, data) => {
+            state.filtered_roles = [];
+            data.forEach((role) =>
+                state.filtered_roles.push({
+                    value: role.id,
+                    label: role.name,
+                }),
+            );
+            // console.log(data);
+        },
     },
 
     actions: {
         getAllDepartments: (context) => {
             axios.get(`${window.url}api/getAllDepartments`).then((response) => {
                 context.commit("set_all_departments", response.data);
+            });
+        },
+        getAllRoles: (context) => {
+            axios.get(`${window.url}api/getAllRoles`).then((response) => {
+                context.commit("set_all_roles", response.data);
             });
         },
     },

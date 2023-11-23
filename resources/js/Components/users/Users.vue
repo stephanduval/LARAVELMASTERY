@@ -104,7 +104,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="row">
-                                        <div class="col md-3"></div>
+                                        <div class="col md-12"></div>
                                         <div class="form-group">
                                             <label for="name">Name</label>
                                             <input
@@ -119,121 +119,161 @@
                                                 "
                                             ></div>
                                         </div>
-                                        <div class="col md-3"></div>
-
-                                        <div class="form-group">
-                                            <label for="name">Email</label>
-                                            <input
-                                                type="email"
-                                                class="form-control"
-                                                v-model="userData.email"
-                                            />
-                                            <div
-                                                class="text-danger"
-                                                v-if="
-                                                    userData.errors.has('email')
-                                                "
-                                            ></div>
+                                        <div class="row">
+                                            <div class="col md-12">
+                                                <div class="form-group">
+                                                    <label for="name"
+                                                        >Email</label
+                                                    >
+                                                    <input
+                                                        type="email"
+                                                        class="form-control"
+                                                        v-model="userData.email"
+                                                    />
+                                                    <div
+                                                        class="text-danger"
+                                                        v-if="
+                                                            userData.errors.has(
+                                                                'email',
+                                                            )
+                                                        "
+                                                    ></div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col md-3"></div>
-
-                                    <div class="form-group">
-                                        <label for="name">Password</label>
-                                        <input
-                                            type="text"
-                                            class="form-control"
-                                            v-model="userData.password"
-                                        />
-                                        <div
-                                            class="text-danger"
-                                            v-if="
-                                                userData.errors.get('password')
-                                            "
-                                        ></div>
-                                    </div>
-                                    <div class="col md-3"></div>
-
-                                    <div class="form-group">
-                                        <label for="department_id"
-                                            >Department</label
-                                        >
-                                        <multi-select
-                                            v-model="userData.department_id"
-                                            :options="filtered_departments"
-                                            :searchable="true"
-                                        />
-                                        <!-- Interesting unusued multi-select options -->
-                                        <!-- :close-on-select="true"
-                                            :clear-on-select="false"
-                                            :preserve-search="true"
-                                            placeholder="Select Department"
-                                            label="name"
-                                            track-by="id"
-                                            :preselect-first="false"  -->
-
-                                        <div
-                                            class="text-danger"
-                                            v-if="userData.errors.has('name')"
-                                        ></div>
-                                    </div>
-                                </div>
-
-                                <!-- <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col md-12">
                                             <div class="form-group">
-                                                <label for="director_id"
-                                                    >Director</label
+                                                <label for="name"
+                                                    >Password</label
                                                 >
-                                                <select
-                                                    name="director_id"
+                                                <input
+                                                    type="text"
                                                     class="form-control"
-                                                    v-model="
-                                                        departmentData.director_id
-                                                    "
-                                                >
-                                                    <option value="">
-                                                        Select a person
-                                                    </option>
-                                                    <option value="1">
-                                                        IT Director
-                                                    </option>
-                                                    <option value="2">
-                                                        HR Director
-                                                    </option>
-                                                </select>
-
+                                                    v-model="userData.password"
+                                                />
                                                 <div
                                                     class="text-danger"
                                                     v-if="
-                                                        departmentData.errors.has(
-                                                            'director_id',
+                                                        userData.errors.get(
+                                                            'password',
                                                         )
                                                     "
-                                                    v-html="
-                                                        departmentData.errors.get(
-                                                            'director_id',
+                                                ></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col md-12">
+                                            <div class="form-group">
+                                                <label for="department_id"
+                                                    >Department</label
+                                                >
+                                                <multi-select
+                                                    v-model="
+                                                        userData.department_id
+                                                    "
+                                                    :options="
+                                                        filtered_departments
+                                                    "
+                                                    :searchable="true"
+                                                />
+                                                <div
+                                                    class="text-danger"
+                                                    v-if="
+                                                        userData.errors.has(
+                                                            'name',
                                                         )
                                                     "
+                                                ></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col md-12">
+                                            <div class="form-group">
+                                                <label for="Roles">Roles</label>
+                                                <multi-select
+                                                    v-model="
+                                                        userData.selected_roles
+                                                    "
+                                                    :options="filtered_roles"
+                                                    :searchable="true"
+                                                    mode="tags"
                                                 />
                                             </div>
-                                        </div> -->
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class=".col-md-12">
+                                            <div class="form-group">
+                                                <label
+                                                    for="permission_categories"
+                                                    >Permission
+                                                    Categories</label
+                                                >
+                                                <multi-select
+                                                    v-model="
+                                                        userData.selected_permission_categories
+                                                    "
+                                                    :options="
+                                                        filtered_permission_categories
+                                                    "
+                                                    :searchable="true"
+                                                    mode="tags"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col md-12">
+                                            <div class="form-group">
+                                                <label
+                                                    for="filtered_permissions"
+                                                    >Permissions</label
+                                                >
+                                                <multi-select
+                                                    v-model="
+                                                        userData.filtered_permissions
+                                                    "
+                                                    :options="
+                                                        filtered_permissions
+                                                    "
+                                                    :searchable="true"
+                                                    mode="tags"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button
+                                            type="button"
+                                            class="btn btn-secondary"
+                                            data-bs-dismiss="modal"
+                                        >
+                                            Close
+                                        </button>
+                                        <button
+                                            type="button"
+                                            @click="
+                                                !editMode
+                                                    ? storeUSer()
+                                                    : updateUser()
+                                            "
+                                            class="btn btn-success"
+                                        >
+                                            {{
+                                                !editMode
+                                                    ? "Store"
+                                                    : "Save Changes"
+                                            }}
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button
-                                type="button"
-                                class="btn btn-secondary"
-                                data-bs-dismiss="modal"
-                            >
-                                Close
-                            </button>
-                            <button
-                                type="button"
-                                @click="!editMode ? storeUSer() : updateUser()"
-                                class="btn btn-success"
-                            >
-                                {{ !editMode ? "Store" : "Save Changes" }}
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -252,7 +292,10 @@ export default {
                 department_id: "", // added department_id
                 name: "",
                 email: "", // added email
-                password: "", // added password
+                password: "",
+                selected_roles: [],
+                selected_permission_catergories: [],
+                selected_permissions: [],
             }),
         };
     },
@@ -297,11 +340,15 @@ export default {
     },
     mounted: function () {
         this.$store.dispatch("getAllDepartments");
+        this.$store.dispatch("getAllRoles");
         this.$store.dispatch("getAuthRolesAndPermissions");
     },
     computed: {
         filtered_departments() {
             return this.$store.getters.filtered_departments;
+        },
+        filtered_roles() {
+            return this.$store.getters.filtered_roles;
         },
         // test() {
         //     return this.$store.getters.test
@@ -310,7 +357,7 @@ export default {
         //     return this.$store.getters.users;
         // },
         current_roles() {
-            return this.$store.getters.current_role;
+            return this.$store.getters.current_roles;
         },
         current_permissions() {
             return this.$store.getters.current_permissions;
