@@ -4,6 +4,9 @@ export default {
     state: {
         filtered_departments: [],
         filtered_roles: [],
+        filtered_permissions_categories: [],
+        filtered_permissions: [],
+        all_permissions: [],
     },
     getters: {
         filtered_departments(state) {
@@ -11,6 +14,12 @@ export default {
         },
         filtered_roles(state) {
             return state.filtered_roles;
+        },
+        filtered_permission_categories(state) {
+            return state.filtered_permissions_categories;
+        },
+        filtered_permissions(state) {
+            return state.filtered_permissions;
         },
     },
     mutations: {
@@ -22,7 +31,6 @@ export default {
                     label: department.name,
                 }),
             );
-            // console.log(data);
         },
         set_all_roles: (state, data) => {
             state.filtered_roles = [];
@@ -32,7 +40,43 @@ export default {
                     label: role.name,
                 }),
             );
-            // console.log(data);
+        },
+        /**
+         *  _set_filtered_permissions
+         * @param {*} state
+         * @param {*} data
+         * Output: Filtered permissions based on the selected permission category
+         */
+        /**
+         *  _set_all_permissions
+         * @param {*} state
+         * @param {*} data
+         * Output: only the first part of the permission name separated by the '-' character is used
+         */
+
+        set_all_permissions: (state, data) => {
+            state.all_permissions = data;
+            state.filtered_permissions_categories = [];
+            let itemsArray = [];
+            data.forEach((item) => {
+                let items = item.name.split("-");
+                itemsArray.push(items[0]);
+            });
+
+            let uniqueItems = [...new Set(itemsArray)];
+            state.filtered_permissions_categories = uniqueItems;
+        },
+        set_filtered_permissions: (state, data) => {
+            state.filtered_permissions = [];
+            data.values.forEach((value) => {
+                state.all_permissions.find((element) => {
+                    if (element.name.includes(value))
+                        state.filtered_permissions.push({
+                            value: element.id,
+                            label: element.name,
+                        });
+                });
+            });
         },
     },
 
@@ -46,6 +90,20 @@ export default {
             axios.get(`${window.url}api/getAllRoles`).then((response) => {
                 context.commit("set_all_roles", response.data);
             });
+        },
+        getAllPermissions: (context) => {
+            axios.get(`${window.url}api/getAllPermissions`).then((response) => {
+                context.commit("set_all_permissions", response.data);
+            });
+        },
+        /**
+         * getFilteredPermissions
+         * @param {*} context
+         *
+         * Output: Filtered permissions based on the selected permission category
+         */
+        getFilteredPermissions: (context, data) => {
+            context.commit("set_filtered_permissions", data);
         },
     },
 };

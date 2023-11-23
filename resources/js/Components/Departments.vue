@@ -221,8 +221,6 @@ export default {
     },
     methods: {
         createDepartment() {
-            console.log("created");
-
             this.editMode = false;
             this.departmentData.name = "";
             $("#exampleModal").modal("show");

@@ -13,71 +13,14 @@
                     </button>
                 </div>
                 <div class="card-body">
-                    <!-- <button @click="testAction" class="btn btn-info">test</button> -->
-                    <!-- {{test}} -->
-                    <div class="table-responsive">
-                        <!-- <table class="table table-hover text-center">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Name</th>
-                                    <th
-                                        v-if="
-                                            current_permissions.has(
-                                                'users-update',
-                                            ) ||
-                                            current_permissions.has(
-                                                'users-delete',
-                                            )
-                                        "
-                                    >
-                                        > Actions
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr
-                                    v-for="(department, index) in departments"
-                                    :key="index"
-                                >
-                                    <td>{{ index + 1 }}</td>
-                                    <td>{{ department.name }}</td>
-                                    <td
-                                        v-if="
-                                            current_permissions.has(
-                                                'departments-update',
-                                            ) ||
-                                            current_permissions.has(
-                                                'departments-delete',
-                                            )
-                                        "
-                                    >
-                                        <button
-                                            class="btn btn-success mx-1"
-                                            @click="editDepartment(department)"
-                                        >
-                                            <i class="fa fa-edit"></i>
-                                        </button>
-                                        <button
-                                            class="btn btn-danger mx-1"
-                                            @click="
-                                                deleteDepartment(department)
-                                            "
-                                        >
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table> -->
-                    </div>
+                    <div class="table-responsive"></div>
 
                     <!-- Modal -->
                     <div
                         class="modal fade"
                         id="exampleModal"
                         tabindex="-1"
-                        aria-labelledby="exampleModalLabel"
+                        aria-labelledby="createorUpdateModalLabel"
                         aria-hidden="true"
                     >
                         <div
@@ -87,7 +30,7 @@
                                 <div class="modal-header">
                                     <h5
                                         class="modal-title"
-                                        id="exampleModalLabel"
+                                        id="createorUpdateModalLabel"
                                     >
                                         {{
                                             !editMode
@@ -99,59 +42,62 @@
                                         type="button"
                                         class="btn-close"
                                         data-bs-dismiss="modal"
-                                        aria-label="Close"
+                                        aria-label="close-modal"
+                                        id="close-modal"
                                     ></button>
                                 </div>
                                 <div class="modal-body">
                                     <div class="row">
-                                        <div class="col md-12"></div>
-                                        <div class="form-group">
-                                            <label for="name">Name</label>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                v-model="userData.name"
-                                            />
-                                            <div
-                                                class="text-danger"
-                                                v-if="
-                                                    userData.errors.has('name')
-                                                "
-                                            ></div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col md-12">
-                                                <div class="form-group">
-                                                    <label for="name"
-                                                        >Email</label
-                                                    >
-                                                    <input
-                                                        type="email"
-                                                        class="form-control"
-                                                        v-model="userData.email"
-                                                    />
-                                                    <div
-                                                        class="text-danger"
-                                                        v-if="
-                                                            userData.errors.has(
-                                                                'email',
-                                                            )
-                                                        "
-                                                    ></div>
-                                                </div>
+                                        <div class="col md-3">
+                                            <div class="form-group">
+                                                <label for="name">Name</label>
+                                                <input
+                                                    type="text"
+                                                    class="form-control"
+                                                    v-model="userData.name"
+                                                    id="name"
+                                                    autocomplete="off"
+                                                />
+                                                <div
+                                                    class="text-danger"
+                                                    v-if="
+                                                        userData.errors.has(
+                                                            'name',
+                                                        )
+                                                    "
+                                                ></div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col md-12">
+                                        <div class="col md-3">
                                             <div class="form-group">
-                                                <label for="name"
+                                                <label for="name">Email</label>
+                                                <input
+                                                    type="email"
+                                                    class="form-control"
+                                                    v-model="userData.email"
+                                                    id="email"
+                                                    autocomplete="off"
+                                                />
+                                                <div
+                                                    class="text-danger"
+                                                    v-if="
+                                                        userData.errors.has(
+                                                            'email',
+                                                        )
+                                                    "
+                                                ></div>
+                                            </div>
+                                        </div>
+                                        <div class="col md-3">
+                                            <div class="form-group">
+                                                <label for="password"
                                                     >Password</label
                                                 >
                                                 <input
                                                     type="text"
                                                     class="form-control"
                                                     v-model="userData.password"
+                                                    id="password"
                                                 />
                                                 <div
                                                     class="text-danger"
@@ -163,9 +109,7 @@
                                                 ></div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col md-12">
+                                        <div class="col md-3">
                                             <div class="form-group">
                                                 <label for="department_id"
                                                     >Department</label
@@ -178,6 +122,7 @@
                                                         filtered_departments
                                                     "
                                                     :searchable="true"
+                                                    id="department_id"
                                                 />
                                                 <div
                                                     class="text-danger"
@@ -194,8 +139,9 @@
                                     <div class="row">
                                         <div class="col md-12">
                                             <div class="form-group">
-                                                <label for="Roles">Roles</label>
+                                                <label for="roles">Roles</label>
                                                 <multi-select
+                                                    id="roles"
                                                     v-model="
                                                         userData.selected_roles
                                                     "
@@ -223,6 +169,10 @@
                                                     "
                                                     :searchable="true"
                                                     mode="tags"
+                                                    id="permission_categories"
+                                                    @input="
+                                                        getFilteredPermissions
+                                                    "
                                                 />
                                             </div>
                                         </div>
@@ -243,6 +193,7 @@
                                                     "
                                                     :searchable="true"
                                                     mode="tags"
+                                                    id="filtered_permissions"
                                                 />
                                             </div>
                                         </div>
@@ -289,73 +240,103 @@ export default {
             editMode: false,
             userData: new Form({
                 id: "",
-                department_id: "", // added department_id
+                department_id: "",
                 name: "",
-                email: "", // added email
+                email: "",
                 password: "",
                 selected_roles: [],
-                selected_permission_catergories: [],
+                selected_permission_categories: [],
                 selected_permissions: [],
             }),
         };
     },
-    // rest of the code...
-
     methods: {
+        getFilteredPermissions(values) {
+            this.$store
+                .dispatch("getFilteredPermissions", { values: values })
+                .then(() => {
+                    this.userData.selected_permissions = [];
+                    this.filtered_permissions.forEach((item) => {
+                        if (!item.label.includes("delete")) {
+                            this.userData.selected_permissions.push(item.value);
+                        }
+                    });
+                });
+        },
         createUser() {
-            console.log("created");
-
             this.editMode = false;
-            this.userData.name = "";
+            this.userData.clear();
+            this.userData.reset();
             $("#exampleModal").modal("show");
         },
         storeUser() {
-            // this.departmentData.name == '' ? this.departmentErrors.name = true : this.departmentErrors.name = false
-            // this.departmentData.director_id == '' ? this.departmentErrors.director_id = true : this.departmentErrors.director_id = false
-
-            // if(this.departmentData.name && this.departmentData.director_id) {
-            this.$store.dispatch("storeDepartment", this.departmentData);
-            // }
+            this.$store.dispatch("storeUser", this.userData);
         },
-        editUser(department) {
+        editUser(user) {
             this.editMode = true;
-            this.userData.id = department.id;
-            this.userData.name = department.name;
+
+            this.userData.id = user.id;
+            this.userData.department_id =
+                user.department_id == 0 ? "" : user.department_id;
+            this.userData.name = user.name;
+            this.userData.email = user.email;
+
+            this.userData.selected_roles = [];
+            this.userData.selected_permission_categories = [];
+            this.userData.selected_permissions = [];
+
+            user.roles.forEach((role) => {
+                this.userData.selected_roles.push(role.id);
+            });
+
+            let permissionsArray = [];
+            user.permissions.forEach((permission) => {
+                let permissions = permission.name.split("-");
+                permissionsArray.push(permissions[0]);
+            });
+            let uniqueItems = [...new Set(permissionsArray)];
+            this.userData.selected_permission_categories = uniqueItems;
+
+            this.$store
+                .dispatch("getFilteredPermissions", { values: uniqueItems })
+                .then(() => {
+                    user.permissions.forEach((permission) => {
+                        this.userData.selected_permissions.push(permission.id);
+                    });
+                });
+
             $("#exampleModal").modal("show");
         },
         updateUser() {
-            // this.departmentData.name == '' ? this.departmentErrors.name = true : this.departmentErrors.name = false
-            // this.departmentData.director_id == '' ? this.departmentErrors.director_id = true : this.departmentErrors.director_id = false
-
-            // if(this.departmentData.name && this.departmentData.director_id) {
             this.$store.dispatch("updateUser", this.userData);
-            // }
         },
-        deleteDepartment(department) {
-            this.$store.dispatch("deleteUser", userData.id);
+        deleteUser(user) {
+            this.$store.dispatch("deleteUser", user);
         },
-        // testAction() {
-        //     this.$store.dispatch('testAction')
-        // }
     },
-    mounted: function () {
+    mounted() {
+        // this.$store.dispatch("getUsers");
         this.$store.dispatch("getAllDepartments");
         this.$store.dispatch("getAllRoles");
+        this.$store.dispatch("getAllPermissions");
         this.$store.dispatch("getAuthRolesAndPermissions");
     },
     computed: {
-        filtered_departments() {
-            return this.$store.getters.filtered_departments;
+        users() {
+            return this.$store.getters.users;
+        },
+        filtered_permissions() {
+            return this.$store.getters.filtered_permissions;
+        },
+        filtered_permission_categories() {
+            return this.$store.getters.filtered_permission_categories;
         },
         filtered_roles() {
             return this.$store.getters.filtered_roles;
         },
-        // test() {
-        //     return this.$store.getters.test
-        // },
-        // departments() {
-        //     return this.$store.getters.users;
-        // },
+        filtered_departments() {
+            return this.$store.getters.filtered_departments;
+        },
         current_roles() {
             return this.$store.getters.current_roles;
         },

@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\PermissionController;
 
 
 /*
@@ -31,5 +32,6 @@ Route::middleware('auth:api')->group(
 
         Route::get('getAllDepartments', [ApiController::class, 'getAllDepartments'])->middleware('auth:api');
         Route::get('getAllRoles', [ApiController::class, 'getAllRoles'])->middleware('auth:api');
+        Route::get('getAllPermissions', [ApiController::class, 'getAllPermissions'])->middleware('auth:api');
     }
 );
