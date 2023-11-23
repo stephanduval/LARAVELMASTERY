@@ -20,7 +20,7 @@
                         class="modal fade"
                         id="exampleModal"
                         tabindex="-1"
-                        aria-labelledby="createorUpdateModalLabel"
+                        aria-labelledby="exampleModalLabel"
                         aria-hidden="true"
                     >
                         <div
@@ -30,7 +30,7 @@
                                 <div class="modal-header">
                                     <h5
                                         class="modal-title"
-                                        id="createorUpdateModalLabel"
+                                        id="exampleModalLabel"
                                     >
                                         {{
                                             !editMode
@@ -42,21 +42,18 @@
                                         type="button"
                                         class="btn-close"
                                         data-bs-dismiss="modal"
-                                        aria-label="close-modal"
-                                        id="close-modal"
+                                        aria-label="Close"
                                     ></button>
                                 </div>
                                 <div class="modal-body">
                                     <div class="row">
-                                        <div class="col md-3">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="name">Name</label>
                                                 <input
                                                     type="text"
                                                     class="form-control"
                                                     v-model="userData.name"
-                                                    id="name"
-                                                    autocomplete="off"
                                                 />
                                                 <div
                                                     class="text-danger"
@@ -65,18 +62,21 @@
                                                             'name',
                                                         )
                                                     "
+                                                    v-html="
+                                                        userData.errors.get(
+                                                            'name',
+                                                        )
+                                                    "
                                                 ></div>
                                             </div>
                                         </div>
-                                        <div class="col md-3">
+                                        <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="name">Email</label>
+                                                <label for="email">Email</label>
                                                 <input
                                                     type="email"
                                                     class="form-control"
                                                     v-model="userData.email"
-                                                    id="email"
-                                                    autocomplete="off"
                                                 />
                                                 <div
                                                     class="text-danger"
@@ -85,23 +85,32 @@
                                                             'email',
                                                         )
                                                     "
+                                                    v-html="
+                                                        userData.errors.get(
+                                                            'email',
+                                                        )
+                                                    "
                                                 ></div>
                                             </div>
                                         </div>
-                                        <div class="col md-3">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="password"
                                                     >Password</label
                                                 >
                                                 <input
-                                                    type="text"
+                                                    type="password"
                                                     class="form-control"
                                                     v-model="userData.password"
-                                                    id="password"
                                                 />
                                                 <div
                                                     class="text-danger"
                                                     v-if="
+                                                        userData.errors.has(
+                                                            'password',
+                                                        )
+                                                    "
+                                                    v-html="
                                                         userData.errors.get(
                                                             'password',
                                                         )
@@ -109,51 +118,42 @@
                                                 ></div>
                                             </div>
                                         </div>
-                                        <div class="col md-3">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="department_id"
                                                     >Department</label
                                                 >
                                                 <multi-select
-                                                    v-model="
-                                                        userData.department_id
-                                                    "
                                                     :options="
                                                         filtered_departments
                                                     "
-                                                    :searchable="true"
-                                                    id="department_id"
-                                                />
-                                                <div
-                                                    class="text-danger"
-                                                    v-if="
-                                                        userData.errors.has(
-                                                            'name',
-                                                        )
+                                                    v-model="
+                                                        userData.department_id
                                                     "
-                                                ></div>
+                                                    :searchable="true"
+                                                ></multi-select>
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="row">
-                                        <div class="col md-12">
+                                        <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="roles">Roles</label>
+                                                <label for="selected_roles"
+                                                    >Roles</label
+                                                >
                                                 <multi-select
-                                                    id="roles"
+                                                    :options="filtered_roles"
                                                     v-model="
                                                         userData.selected_roles
                                                     "
-                                                    :options="filtered_roles"
                                                     :searchable="true"
                                                     mode="tags"
-                                                />
+                                                ></multi-select>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class=".col-md-12">
+                                        <div class="col-md-12">
                                             <div class="form-group">
                                                 <label
                                                     for="permission_categories"
@@ -161,68 +161,63 @@
                                                     Categories</label
                                                 >
                                                 <multi-select
-                                                    v-model="
-                                                        userData.selected_permission_categories
-                                                    "
                                                     :options="
                                                         filtered_permission_categories
                                                     "
+                                                    v-model="
+                                                        userData.selected_permission_categories
+                                                    "
                                                     :searchable="true"
                                                     mode="tags"
-                                                    id="permission_categories"
                                                     @input="
                                                         getFilteredPermissions
                                                     "
-                                                />
+                                                ></multi-select>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col md-12">
+                                        <div class="col-md-12">
                                             <div class="form-group">
                                                 <label
                                                     for="filtered_permissions"
                                                     >Permissions</label
                                                 >
                                                 <multi-select
-                                                    v-model="
-                                                        userData.filtered_permissions
-                                                    "
                                                     :options="
                                                         filtered_permissions
                                                     "
+                                                    v-model="
+                                                        userData.selected_permissions
+                                                    "
                                                     :searchable="true"
                                                     mode="tags"
-                                                    id="filtered_permissions"
-                                                />
+                                                ></multi-select>
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="modal-footer">
-                                        <button
-                                            type="button"
-                                            class="btn btn-secondary"
-                                            data-bs-dismiss="modal"
-                                        >
-                                            Close
-                                        </button>
-                                        <button
-                                            type="button"
-                                            @click="
-                                                !editMode
-                                                    ? storeUSer()
-                                                    : updateUser()
-                                            "
-                                            class="btn btn-success"
-                                        >
-                                            {{
-                                                !editMode
-                                                    ? "Store"
-                                                    : "Save Changes"
-                                            }}
-                                        </button>
-                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button
+                                        type="button"
+                                        class="btn btn-secondary"
+                                        data-bs-dismiss="modal"
+                                    >
+                                        Close
+                                    </button>
+                                    <button
+                                        type="button"
+                                        @click="
+                                            !editMode
+                                                ? storeUser()
+                                                : updateUser()
+                                        "
+                                        class="btn btn-success"
+                                    >
+                                        {{
+                                            !editMode ? "Store" : "Save Changes"
+                                        }}
+                                    </button>
                                 </div>
                             </div>
                         </div>
