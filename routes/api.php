@@ -34,6 +34,6 @@ Route::middleware('auth:api')->group(
         Route::get('getAllRoles', [ApiController::class, 'getAllRoles'])->middleware('auth:api');
         Route::get('getAllPermissions', [ApiController::class, 'getAllPermissions'])->middleware('auth:api');
 
-        Route::post(('storeUser'), [userController::class, 'storeUser'])
+        Route::post(('storeUser'), [userController::class, 'storeUser']);
     }
 );
