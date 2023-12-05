@@ -1,15 +1,11 @@
 import axios from "axios";
 
 export default {
-    state: {},
+    state: {
+        // departments_test: 0,
+        userData: {},
+    },
     getters: {},
     mutations: {},
-    actions: {
-        storeUser: (context, departmentData) => {
-            userData.post(window.url + "api/storeUser").then((response) => {
-                // context.dispatch("getUsers");
-                $("#exampleModal").modal("hide");
-            });
-        },
-    },
+    actions: { storeUser() {} },
 };

@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\PermissionController;
-use App\Http\Controllers\UserController;
 
 
 /*
