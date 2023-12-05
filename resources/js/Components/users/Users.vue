@@ -13,7 +13,69 @@
                     </button>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive"></div>
+                    <!-- <button @click="testAction" class="btn btn-info">test</button> -->
+                    <!-- {{test}} -->
+                    <div class="table-responsive">
+                        <table class="table table-hover text-center">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Department</th>
+                                    <th
+                                        v-if="
+                                            current_permissions.has(
+                                                'users-update',
+                                            ) ||
+                                            current_permissions.has(
+                                                'users-delete',
+                                            )
+                                        "
+                                    >
+                                        Actions
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(user, index) in users" :key="index">
+                                    <td>{{ index + 1 }}</td>
+                                    <td>{{ user.name }}</td>
+                                    <td>{{ user.email }}</td>
+                                    <td>
+                                        {{
+                                            user.department != null
+                                                ? user.department.name
+                                                : "..."
+                                        }}
+                                    </td>
+                                    <td
+                                        v-if="
+                                            current_permissions.has(
+                                                'users-update',
+                                            ) ||
+                                            current_permissions.has(
+                                                'users-delete',
+                                            )
+                                        "
+                                    >
+                                        <button
+                                            class="btn btn-success mx-1"
+                                            @click="editUser(user)"
+                                        >
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                        <button
+                                            class="btn btn-danger mx-1"
+                                            @click="deleteUser(user)"
+                                        >
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
                     <!-- Modal -->
                     <div
@@ -310,7 +372,7 @@ export default {
         },
     },
     mounted() {
-        // this.$store.dispatch("getUsers");
+        this.$store.dispatch("getUsers");
         this.$store.dispatch("getAllDepartments");
         this.$store.dispatch("getAllRoles");
         this.$store.dispatch("getAllPermissions");

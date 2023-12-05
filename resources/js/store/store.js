@@ -1,7 +1,7 @@
 import { createStore } from "vuex";
 
-import departmentsModule from "./modules/departments";
 import apidataModule from "./modules/apidata";
+import departmentsModule from "./modules/departments";
 import usersModule from "./modules/users";
 
 export const store = createStore({
@@ -52,12 +52,8 @@ export const store = createStore({
         // testAction: (context) => {
         //     context.commit('testMutation')
         // }
-
         getAuthRolesAndPermissions: (context) => {
             context.commit("get_auth_roles_and_permission");
         },
-        // getAuthRolesAndPermissions: (context) => {
-        //     context.commit("get_auth_roles_and_permission");
-        // },
     },
 });

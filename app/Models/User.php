@@ -14,8 +14,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 
 
-class User extends Authenticatable
-{
+class User extends Authenticatable {
     // use LaratrustUserTrait;
     use HasRolesAndPermissions;
     use HasApiTokens, HasFactory, Notifiable;
@@ -26,6 +25,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'department_id',
         'name',
         'email',
         'password',
@@ -48,6 +48,9 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
     ];
+
+    public function department() {
+        return $this->belongsTo('App\Models\Department');
+    }
 }
