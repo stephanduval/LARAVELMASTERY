@@ -14,18 +14,25 @@
 
 <body>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 mt-5">
-                <img src="{{ asset('images/auth.png') }}" alt="auth">
+    <div class="auth-main">
+        <div class="auth-container">
+            <div class="container">
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-md-6 d-md-block d-none max-height:10px">
+                        <img src="{{ asset('images/auth.png') }}" alt="auth" width="auto" height="560em">
 
-            </div>
-            <div class="col-md-4">
-                @yield('content')
+                    </div>
 
+                    <div class="col-md-6">
+                        @yield('content')
+
+                    </div>
+                </div>
             </div>
+
         </div>
     </div>
+
 
 </body>
 
