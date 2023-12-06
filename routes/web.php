@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\UserController;
@@ -34,7 +35,14 @@ Route::get('users/index', function () {
 });
 */
 
-Route::get('/', [HomeController::class, 'dashboard'])->name('dashboard');
+
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+Route::get('/', function () {
+    return redirect('/login');
+});
+
+Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard')->name('dashboard');
 
 Route::get('departments/index', [DepartmentController::class, 'index'])->name('departmentsIndex');
 Route::get('departments/create', [DepartmentController::class, 'create'])->name('departmentsCreate');
