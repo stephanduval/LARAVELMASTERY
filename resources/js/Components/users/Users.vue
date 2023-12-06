@@ -5,6 +5,7 @@
                 <div class="card-header bg-dark">
                     <h5 class="float-start text-light">Users List</h5>
                     <button
+                        type="button"
                         class="btn btn-success float-end"
                         @click="createUser"
                         v-if="current_permissions.has('users-create')"
