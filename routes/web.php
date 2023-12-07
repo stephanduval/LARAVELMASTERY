@@ -37,12 +37,16 @@ Route::get('users/index', function () {
 
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/', function () {
     return redirect('/login');
 });
 
-Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard')->name('dashboard');
+Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+
+
+
 
 Route::get('departments/index', [DepartmentController::class, 'index'])->name('departmentsIndex');
 Route::get('departments/create', [DepartmentController::class, 'create'])->name('departmentsCreate');
