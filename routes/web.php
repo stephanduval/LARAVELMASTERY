@@ -1,11 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
+
 
 
 /*
@@ -34,7 +36,19 @@ Route::get('users/index', function () {
 });
 */
 
-Route::get('/', [HomeController::class, 'dashboard'])->name('dashboard');
+Route::post("/login", [AuthController::class, "login"])->name('login');
+
+
+// // This code breaks the submenu
+// Route::get('/', function () {
+//     return redirect("/login");
+// });
+
+Route::post("/", [AuthController::class, "login"])->name('login');
+
+
+
+Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
 
 Route::get('departments/index', [DepartmentController::class, 'index'])->name('departmentsIndex');
 Route::get('departments/create', [DepartmentController::class, 'create'])->name('departmentsCreate');
