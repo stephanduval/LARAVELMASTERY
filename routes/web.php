@@ -44,11 +44,16 @@ Route::post("/login", [AuthController::class, "login"])->name('login');
 //     return redirect("/login");
 // });
 
-Route::post("/", [AuthController::class, "login"])->name('login');
+// This code creates an infinite loop:
+// Route::get('/', function () {
+//     return redirect("/login");
+// });
 
+//  This code totaly breaks the Sidebar Menu
+// Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
 
+Route::get('/', [HomeController::class, 'dashboard'])->name('dashboard');
 
-Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
 
 Route::get('departments/index', [DepartmentController::class, 'index'])->name('departmentsIndex');
 Route::get('departments/create', [DepartmentController::class, 'create'])->name('departmentsCreate');
