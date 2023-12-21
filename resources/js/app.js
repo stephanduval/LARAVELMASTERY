@@ -1,3 +1,4 @@
+// Boostrap.js is the first JS code to run in out application
 import "./bootstrap";
 
 import { createApp } from "vue";
