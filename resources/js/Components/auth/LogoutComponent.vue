@@ -15,7 +15,24 @@ export default {
     methods: {
         parseToJson(tokenValue) {
             let base64Url = tokenValue.split(".")[1];
+
             let base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+
+            let jsonPayload = decodeURIComponent(
+                window
+                    .atob(base64)
+                    .split("")
+                    .map((c) => {
+                        return (
+                            "%" +
+                            ("00 " + c.charCodeAt(0).toString(16)).slice(-2)
+                        );
+                    })
+                    .join(""),
+            );
+
+            let tokenData = JSON.parse(jsonPayload);
+            console.log("tokenData", tokenData);
         },
     },
 };
