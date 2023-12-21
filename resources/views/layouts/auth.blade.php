@@ -24,6 +24,11 @@
                     </div>
 
                     <div class="col-md-6">
+                        @if (Session::has('success-message'))
+                            <p class="text-success text-center">
+                                {{ session::get('success-message') }}
+                            </p>
+                        @endif
                         @yield('content')
 
                     </div>

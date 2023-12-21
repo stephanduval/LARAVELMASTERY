@@ -51,9 +51,11 @@ Route::post("/login", [AuthController::class, "login"])->name('login');
 
 //  This code totaly breaks the Sidebar Menu
 // Route::get('/login', [AuthController::class, 'login'])->name('login');
-// Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+//  This code totaly breaks the Register Link
+// Route::get('/register', [HomeController::class, 'register'])->name('register');
 
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 Route::get('/', [HomeController::class, 'dashboard'])->name('dashboard');
 
 

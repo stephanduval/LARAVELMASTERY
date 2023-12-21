@@ -4,10 +4,8 @@
     <div class="auth-card">
         <div class="row">
             <div class="col-md-12">
+                <h3 class="text-center">Register to login to the Task Tracking MIS</h3>
                 <div class="card">
-                    <h3 class="text-center">
-                        Register for Task Tracking MIS
-                    </h3>
                     <div class="card-header bg-secondary">
                         <h5 class="text-center text-light">Register</h5>
                     </div>
@@ -21,7 +19,7 @@
                                     placeholder="Email Address" required autofocus>
 
                                 @error('email')
-                                    <span class="invalid-feedback">
+                                    <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
@@ -33,7 +31,7 @@
                                     placeholder="User Name" required>
 
                                 @error('name')
-                                    <span class="invalid-feedback">
+                                    <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
@@ -46,25 +44,26 @@
                                     required>
 
                                 @error('password')
-                                    <span class="invalid-feedback">
+                                    <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
                             <div class="form-group my-1">
                                 <label for="password_confirmation">Confirm Password</label>
-                                <input type="password" name="password_confirmation"
-                                    class="form-control autocomplete="new-password" placeholder="Confirm password" required>
+                                <input type="password" name="password_confirmation" class="form-control"
+                                    autocomplete="new-password" placeholder="Confirm your password" required>
 
                                 @error('password')
-                                    <span class="invalid-feedback">
+                                    <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
+
                             <div class="d-flex justify-content-between mt-3">
                                 <button type="submit" class="btn btn-warning">Register</button>
-                                <a href="{{ route('login') }}" class="btn btn-dark">Login</a>
+                                <a href="{{ route('login') }}" class="btn btn-dark">Go to login</a>
                             </div>
                         </form>
                     </div>
