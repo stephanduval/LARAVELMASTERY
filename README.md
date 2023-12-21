@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Enhancing Customer Service: A Journey of Learning</title>
 </head>
 <body>
 
-<h1>Welcome to our Learning Journey</h1>
+<h1 style= "text-align: center">Project: Kohana to Laravel Framework Update for eSnail.ca</h1>
 
-<p>Project: Laravel Website Update</p>
-
-<img src="[https://www.esnail.ca/index.html](https://www.esnail.ca/media/images/logo.png)" alt="Company Logo" style="width: 200px; height: 200px;">
-
+<p align="center">
+<img src="https://www.esnail.ca/media/images/logo.png" alt="eSnail.ca Company Logo">
+</p>
 <h2>About This Project</h2>
 
 <p>Our company has been serving our valued customers for two decades, and we take immense pride in the trust and satisfaction they've shown us throughout the years. As we embark on the journey of updating our company's website, we see it as an opportunity to give back even more to our loyal customers.</p>
@@ -30,15 +29,15 @@
 
 <p>This project is not just about updating a website; it's also about personal and professional growth. As a new programmer, I'm excited to embrace this opportunity to learn and apply new skills. Every line of code, every design choice, and every user interaction will be a stepping stone towards becoming a better programmer.</p>
 
-<h2>Join Us on this Journey</h2>
+<h2>Tutorial Project Only</h2>
 
-<p>We invite you to join us on this exciting journey of learning and improvement. Your feedback and insights will be invaluable as we strive to provide even better customer service. Together, we can create a website that not only represents our company's legacy but also showcases our commitment to excellence.</p>
+<p>This project will become a private repository once the test website is finished.</p>
 
 <p>Thank you for your continued support!</p>
 
 <h2>Contact Information</h2>
 
-<p>If you have any questions or suggestions, please feel free to reach out to us at [insert contact email here].</p>
+<p>If you have any questions or suggestions, please feel free to reach out to me at <a href="mailto:stephan.duval@gmail.com">stephan.duval@gmail.com</a>.</p>
 
 </body>
 </html>
