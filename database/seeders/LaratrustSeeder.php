@@ -58,7 +58,7 @@ class LaratrustSeeder extends Seeder
             }
 
             // Add all permissions to the role
-            $role->permissions()->sync($permissions);
+            // $role->permissions()->sync($permissions);
 
             if (Config::get('laratrust_seeder.create_users')) {
                 $this->command->info("Creating '{$key}' user");
@@ -68,8 +68,8 @@ class LaratrustSeeder extends Seeder
                     'email' => $key . '@app.com',
                     'password' => bcrypt('password')
                 ]);
-                // $user->addRole($role);
-                $user->attachRole($role);
+                $user->addRole($role);
+                // $user->attachRole($role);
                 $user->permissions()->sync($permissions);
             }
         }
