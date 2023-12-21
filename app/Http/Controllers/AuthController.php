@@ -63,7 +63,7 @@ class AuthController extends Controller
         ]);
 
         Session::flash('success-message', 'Account created successfully!');
-        return redirect('/');
+        return redirect('/login');
     }
 
 }
