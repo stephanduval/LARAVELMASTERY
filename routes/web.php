@@ -28,7 +28,7 @@ Route::get('/', [HomeController::class, 'dashboard'])->name('dashboard');
 Route::controller(AuthController::class)->group(function () {
     Route::post('/register', 'register')->name('register');
     // this code breaks the submenu dropdown
-    // Route::post('/login', 'login')->name('login');
+    Route::post('/login', 'login')->name('login');
     Route::post('/logout', 'logout')->name('logout')->middleware('auth');
 });
 

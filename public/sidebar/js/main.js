@@ -1,9 +1,9 @@
-(function ($) {
+jQuery(function ($) {
     "use strict";
 
     var fullHeight = function () {
         $(".js-fullheight").css("height", $(window).height());
-        $(window).resize(function () {
+        $(window).on("resize", function () {
             $(".js-fullheight").css("height", $(window).height());
         });
     };
@@ -16,4 +16,4 @@
     $("#navbarCollapse").on("click", function () {
         $("#navbarSupportedContent").toggleClass("collapse");
     });
-})(jQuery);
+});

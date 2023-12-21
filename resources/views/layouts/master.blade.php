@@ -42,7 +42,7 @@
                         <li
                             class="{{ Request::is('departments/index', 'users/index', 'roles/index', 'permissions/index') ? 'active' : '' }}">
                             <a href="#homeSubmenu"
-                                data-bs-toggle="{{ Request::is('departments/index', 'users/index', 'roles/index', 'permissions/index', '/') ? 'collapse' : '' }}"
+                                data-bs-toggle="{{ Request::is('dashboard', 'departments/index', 'users/index', 'roles/index', 'permissions/index', '/') ? 'collapse' : '' }}"
                                 role="button"
                                 aria-expanded="{{ Request::is('departments/index', 'users/index', 'roles/index', '/') ? 'false' : 'true' }}"
                                 aria-controls="homeSubmenu">
