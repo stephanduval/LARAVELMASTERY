@@ -31,7 +31,7 @@ class LaratrustSeeder extends Seeder
         foreach ($config as $key => $modules) {
 
             // Create a new role
-            $role = \App\Models\Role::firstOrCreate([
+            $role        = \App\Models\Role::firstOrCreate([
                 'name' => $key,
                 'display_name' => ucwords(str_replace('_', ' ', $key)),
                 'description' => ucwords(str_replace('_', ' ', $key))
@@ -68,7 +68,8 @@ class LaratrustSeeder extends Seeder
                     'email' => $key . '@app.com',
                     'password' => bcrypt('password')
                 ]);
-                $user->addRole($role);
+                // $user->addRole($role);
+                $user->attachRole($role);
                 $user->permissions()->sync($permissions);
             }
         }
