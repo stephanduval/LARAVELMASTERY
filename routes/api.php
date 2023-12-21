@@ -21,7 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(["middleware", ["forcetojson", "auth:api"]], function () {
+Route::middleware(['forcetojson', 'auth:api'])->group(function () {
 
 
     Route::get('getDepartments', [DepartmentController::class, 'getDepartments']);
@@ -39,5 +39,7 @@ Route::group(["middleware", ["forcetojson", "auth:api"]], function () {
     Route::post('deleteUser/{id}', [UserController::class, 'deleteUser']);
 
 
-})
-;
+
+});
+
+

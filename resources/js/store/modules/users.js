@@ -2,7 +2,6 @@ import axios from "axios";
 
 export default {
     state: {
-<<<<<<< HEAD
         users: [],
     },
     getters: {
@@ -45,12 +44,4 @@ export default {
             }
         },
     },
-=======
-        // departments_test: 0,
-        userData: {},
-    },
-    getters: {},
-    mutations: {},
-    actions: { storeUser() {} },
->>>>>>> origin/main
 };
