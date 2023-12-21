@@ -119,7 +119,9 @@
                                     onClick="event.preventDefault(); document.getElementById('logout-form').submit()">Logout</a>
 
                                 <form action="{{ route('logout') }}" method="POST" id="logout-form">
-                                    @csrf</form>
+                                    @csrf
+                                    <logout-component></logout-component>
+                                </form>
                             </li>
 
                         </ul>
