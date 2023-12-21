@@ -10,7 +10,8 @@ export default {
         };
     },
     mounted() {
-        this.parseToJson(window.token);
+        let tokenData = this.parseToJson(window.token);
+        this.token_id = tokenData.jti;
     },
     methods: {
         parseToJson(tokenValue) {
@@ -25,14 +26,14 @@ export default {
                     .map((c) => {
                         return (
                             "%" +
-                            ("00 " + c.charCodeAt(0).toString(16)).slice(-2)
+                            ("00" + c.charCodeAt(0).toString(16)).slice(-2)
                         );
                     })
                     .join(""),
             );
 
             let tokenData = JSON.parse(jsonPayload);
-            console.log("tokenData", tokenData);
+            return tokenData;
         },
     },
 };
