@@ -42,7 +42,7 @@
                         <li
                             class="{{ Request::is('departments/index', 'users/index', 'roles/index', 'permissions/index') ? 'active' : '' }}">
                             <a href="#homeSubmenu"
-                                data-bs-toggle="{{ Request::is('dashboard', 'departments/index', 'users/index', 'roles/index', 'permissions/index', '/') ? 'collapse' : '' }}"
+                                data-bs-toggle="{{ Request::is('dashboard', 'departments/index', 'users/index', 'roles/index', 'permissions/index', '/', 'profile/index') ? 'collapse' : '' }}"
                                 role="button"
                                 aria-expanded="{{ Request::is('departments/index', 'users/index', 'roles/index', '/') ? 'false' : 'true' }}"
                                 aria-controls="homeSubmenu">
@@ -112,7 +112,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="#">Settings</a>
+                                <a class="nav-link" href="{{ route('profileIndex') }}">Settings</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('logout') }}"
