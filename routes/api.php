@@ -23,7 +23,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware(['forcetojson', 'auth:api'])->group(function () {
 
-
     Route::get('getDepartments', [DepartmentController::class, 'getDepartments']);
     Route::post('storeDepartment', [DepartmentController::class, 'storeDepartment']);
     Route::post('updateDepartment/{id}', [DepartmentController::class, 'updateDepartment']);

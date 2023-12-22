@@ -23,7 +23,7 @@ app.component("permissions-create", PermissionsCreate);
 app.component("users", Users);
 app.component("multi-select", Multiselect);
 
-window.url = "/task_mis/";
+window.url = "/";
 
 app.use(store);
 

@@ -19,15 +19,12 @@ use App\Http\Controllers\UserController;
 |
 */
 
-// Route::get('/', function () {
-//     return redirect('/login');
-// });
-Route::get('/', [HomeController::class, 'dashboard'])->name('dashboard');
-
+Route::get('/', function () {
+    return redirect('/login');
+});
 
 Route::controller(AuthController::class)->group(function () {
     Route::post('/register', 'register')->name('register');
-    // this code breaks the submenu dropdown
     Route::post('/login', 'login')->name('login');
     Route::post('/logout', 'logout')->name('logout')->middleware('auth');
 });
