@@ -13,7 +13,7 @@ class PermissionController extends Controller
 
     public function index()
     {
-        $permissions = Permission::all();
+        $permissions = Permission::orderBy('id', 'desc', )->paginate(10);
         return view('management.permissions.index', compact('permissions'));
     }
 
@@ -49,9 +49,9 @@ class PermissionController extends Controller
             $crud = $request->crudSelected;
             if (count($crud) > 0) {
                 foreach ($crud as $item) {
-                    $name = strtolower($request->resource) . '-' . strtolower($item);
+                    $name         = strtolower($request->resource) . '-' . strtolower($item);
                     $display_name = ucwords($request->resource . ' ' . $item);
-                    $description = ucwords($request->resource . ' ' . $item);
+                    $description  = ucwords($request->resource . ' ' . $item);
 
                     // Create individual permission entries here
                     Permission::create([

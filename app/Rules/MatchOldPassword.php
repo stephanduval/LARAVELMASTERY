@@ -2,17 +2,14 @@
 
 namespace App\Rules;
 
-use Closure;
-use Illuminate\Contracts\Validation\ValidationRule;
+use Illuminate\Contracts\Validation\Rule;
 use Hash;
 use Auth;
 
-class MatchOldPassword implements ValidationRule
+class MatchOldPassword implements Rule
 {
-
     /**
      * Create a new rule instance.
-     *
      *
      * @return void
      */
@@ -25,24 +22,21 @@ class MatchOldPassword implements ValidationRule
      * Determine if the validation rule passes.
      *
      * @param  string  $attribute
-     * @param  mixed[]  $value
+     * @param  mixed  $value
      * @return bool
      */
-
     public function passes($attribute, $value)
     {
-        return Hash::check($value, auth()->user()->password);
+        return Hash::check($value, Auth::user()->password);
     }
 
     /**
      * Get the validation error message.
      *
-     * @param  string  $attribute
-     * @param  mixed[]  $value
      * @return string
      */
     public function message()
     {
-        return 'The old password deos not match';
+        return 'The old password does not match.';
     }
 }

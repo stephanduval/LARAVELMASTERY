@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use Auth;
-use Session;
 use App\Rules\MatchOldPassword;
+use Validator;
+use Auth;
+use Hash;
+use Session;
 
 class ProfileController extends Controller
 {
@@ -18,26 +20,39 @@ class ProfileController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $validation = Validator::make($request->all(), [
             'name' => ['required'],
-            'email' => ['required', 'email', 'unique:users,email,' . $id],
+            'email' => ['required', 'email', 'unique:users,email,' . $id]
         ]);
+
+        if ($validation->fails()) {
+            return redirect()->back()->withErrors($validation);
+        }
 
         User::where('id', $id)->update([
             'name' => $request->name,
             'email' => $request->email,
         ]);
 
-        Session::flash('success-message', 'Profile updated successfully!');
+        Session::flash('success-message', 'Information updated successfully!');
         return redirect()->route('profileIndex');
     }
 
     public function passwordUpdate(Request $request, $id)
     {
-        $request->validate([
+        $validation = Validator::make($request->all(), [
             'old_password' => ['required', new MatchOldPassword],
             'password' => ['required', 'confirmed'],
-            'passworrd_confirmation' => ['required'],
+            'password_confirmation' => ['required']
         ]);
+
+        if ($validation->fails()) {
+            return redirect()->back()->withErrors($validation);
+        }
+
+        User::find($id)->update(['password' => Hash::make($request->password)]);
+
+        Session::flash('success-message', 'Password updated successfully!');
+        return redirect()->route('profileIndex');
     }
 }
