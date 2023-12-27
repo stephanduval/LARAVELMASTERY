@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Auth;
 use Session;
+use App\Rules\MatchOldPassword;
 
 class ProfileController extends Controller
 {
@@ -33,6 +34,10 @@ class ProfileController extends Controller
 
     public function passwordUpdate(Request $request, $id)
     {
-
+        $request->validate([
+            'old_password' => ['required', new MatchOldPassword],
+            'password' => ['required', 'confirmed'],
+            'passworrd_confirmation' => ['required'],
+        ]);
     }
 }

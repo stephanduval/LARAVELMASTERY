@@ -52,7 +52,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="new_password">New Password</label>
-                                    <input type="password" class="form-control" name="new_password">
+                                    <input type="password" class="form-control" name="password">
                                 </div>
                             </div>
                             <div class="col-md-4">
