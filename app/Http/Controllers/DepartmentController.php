@@ -19,7 +19,7 @@ class DepartmentController extends Controller
     public function getDepartments()
     {
         // \Log::info('getDepartments function called');
-        return response()->json(Department::latest()->get());
+        return response()->json(Department::latest()->paginate(10));
     }
 
     public function storeDepartment(Request $request)

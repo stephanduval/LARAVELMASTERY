@@ -25,9 +25,11 @@
 
                     <div class="col-md-6">
                         @if (Session::has('success-message'))
-                            <p class="text-success text-center">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 {{ session::get('success-message') }}
-                            </p>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
                         @endif
                         @yield('content')
 

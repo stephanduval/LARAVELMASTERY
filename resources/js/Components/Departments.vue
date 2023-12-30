@@ -37,7 +37,9 @@
                             </thead>
                             <tbody>
                                 <tr
-                                    v-for="(department, index) in departments"
+                                    v-for="(
+                                        department, index
+                                    ) in departments.data"
                                     :key="index"
                                 >
                                     <td>{{ index + 1 }}</td>
@@ -70,6 +72,29 @@
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+                    <div
+                        class="d-flex justify-content-center"
+                        v-if="departmentLinks.length > 3"
+                    >
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li
+                                    :class="`page-item ${
+                                        link.active ? 'active' : ''
+                                    } ${!link.url ? 'disabled' : ''}`"
+                                    v-for="(link, index) in departmentLinks"
+                                    :key="index"
+                                >
+                                    <a
+                                        class="page-link"
+                                        href="#"
+                                        v-html="link.label"
+                                        @click.prevent="getResults(link)"
+                                    ></a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
 
                     <!-- Modal -->
@@ -220,6 +245,13 @@ export default {
         };
     },
     methods: {
+        getResults(link) {
+            if (!link.url || link.active) {
+                return;
+            } else {
+                this.$store.dispatch("getDepartmentsResults", link);
+            }
+        },
         createDepartment() {
             this.editMode = false;
             this.departmentData.name = "";
@@ -261,9 +293,9 @@ export default {
         this.$store.dispatch("getAuthRolesAndPermissions");
     },
     computed: {
-        // test() {
-        //     return this.$store.getters.test
-        // },
+        departmentLinks() {
+            return this.$store.getters.departmentLinks;
+        },
         departments() {
             return this.$store.getters.departments;
         },

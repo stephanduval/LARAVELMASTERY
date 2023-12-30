@@ -16,6 +16,7 @@ export default {
     mutations: {
         set_users: (state, data) => {
             state.users = data;
+
             state.userLinks = [];
 
             for (let i = 0; i < data.links.length; i++) {
