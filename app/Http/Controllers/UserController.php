@@ -6,16 +6,20 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Hash;
 
-class UserController extends Controller {
-    public function index() {
+class UserController extends Controller
+{
+    public function index()
+    {
         return view('management.users.index');
     }
 
-    public function getUsers() {
-        return response()->json(User::with('department')->with('roles')->with('permissions')->get());
+    public function getUsers()
+    {
+        return response()->json(User::with('department')->with('roles')->with('permissions')->paginate(10));
     }
 
-    public function storeUser(Request $request) {
+    public function storeUser(Request $request)
+    {
         // return $request->all();
         $request->validate([
             'name' => 'required',
@@ -23,7 +27,7 @@ class UserController extends Controller {
             'password' => 'required',
         ]);
 
-        if($request->department_id != '') {
+        if ($request->department_id != '') {
             $department_id = $request->department_id;
         } else {
             $department_id = 0;
@@ -42,7 +46,8 @@ class UserController extends Controller {
         return response()->json('success');
     }
 
-    public function updateUser(Request $request, $id) {
+    public function updateUser(Request $request, $id)
+    {
         $request->validate([
             'name' => 'required',
             'email' => 'required',
@@ -50,13 +55,13 @@ class UserController extends Controller {
 
         $user = User::findOrFail($id);
 
-        if($request->department_id != '') {
+        if ($request->department_id != '') {
             $department_id = $request->department_id;
         } else {
             $department_id = 0;
         }
 
-        if($request->password === null) {
+        if ($request->password === null) {
             $password = $user->password;
         } else {
             $password = Hash::make($request->password);
@@ -75,7 +80,8 @@ class UserController extends Controller {
         return response()->json('success');
     }
 
-    public function deleteUser($id) {
+    public function deleteUser($id)
+    {
         $user = User::findOrFail($id);
         $user->roles()->detach();
         $user->permissions()->detach();
